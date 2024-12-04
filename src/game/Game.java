@@ -1,8 +1,10 @@
 package game;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Game {
+
     public static void main(String[] args) {
         System.out.println("Hello World!");
 
@@ -16,12 +18,22 @@ public class Game {
         ImageIcon icon = new ImageIcon("C:/Users/Lenovo/Documents/MyGame/resources/cig.png");
         window.setIconImage(icon.getImage());
 
-        GamePanel gPanel = new GamePanel();
-        window.add(gPanel);
-        //window.pack();  // okno bedzie dostosowywac sie do rzomiaru panelu
-       // gPanel.add("C:/Users/Lenovo/Documents/MyGame/resources/fronx1.png");
-        window.setVisible(true);
+        // przechodzenie miedzy ekranami gry i menu
+        CardLayout cardLayout = new CardLayout();
+        JPanel mainPanel = new JPanel(cardLayout);
+        mainPanel.setPreferredSize(new Dimension(1248, 768));
+
+        MenuPanel menuPanel = new MenuPanel(cardLayout, mainPanel);
+        GamePanel gPanel = new GamePanel(cardLayout, mainPanel);
+
         gPanel.startThread();
+
+        mainPanel.add(menuPanel, "Menu");
+        mainPanel.add(gPanel, "Game");
+        cardLayout.show(mainPanel, "Menu");
+        window.add(mainPanel);
+        window.pack();      // okno bedzie dostosowywac sie do rzomiaru panelu
+        window.setVisible(true);
 
     }
 }

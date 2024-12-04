@@ -26,8 +26,9 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     MapElementManager mapEl = new MapElementManager(this);
 
     //konstruktor
-    public GamePanel() {
+    public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
+        //this.setLayout(null);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);    // gra jest caly czas "gotowa" na nacisniecie klawisza

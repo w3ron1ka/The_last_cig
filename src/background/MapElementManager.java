@@ -19,7 +19,7 @@ public class MapElementManager {
         mapElements = new MapElement[9];
         map = new int [gP.dispGridSize][gP.dispGridSize];
         getImage();
-        getMap("/maps/mapkaProbna.txt");
+        getMap("/maps/map1.txt");
     }
     public void getImage(){
         try {
@@ -78,7 +78,7 @@ public class MapElementManager {
                 y += gP.dispGridSize;
             }
         }
-        g2d.drawImage(mapElements[2].image,48,48, gP.dispGridSize, gP.dispGridSize, null);
+        //g2d.drawImage(mapElements[2].image,48,48, gP.dispGridSize, gP.dispGridSize, null);
 
     }
 }
