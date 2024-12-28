@@ -11,8 +11,8 @@ import java.io.InputStreamReader;
 
 public class MapElementManager {
     GamePanel gP;
-    MapElement[] mapElements;
-    int [][] map;
+    public MapElement[] mapElements;
+    public int [][] map;
 
     public MapElementManager(GamePanel gP) {
         this.gP = gP;
@@ -25,10 +25,12 @@ public class MapElementManager {
         try {
             mapElements[0] = new MapElement();
             mapElements[0].image = ImageIO.read(getClass().getResourceAsStream("/background/concrete.png"));
+            mapElements[0].collision = true;
             mapElements[1] = new MapElement();
             mapElements[1].image = ImageIO.read(getClass().getResourceAsStream("/background/grass.png"));
             mapElements[2] = new MapElement();
             mapElements[2].image = ImageIO.read(getClass().getResourceAsStream("/background/brick.png"));
+            mapElements[2].collision = true;
         } catch (IOException e) {
             e.printStackTrace();
         }

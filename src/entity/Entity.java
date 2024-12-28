@@ -12,4 +12,7 @@ public class Entity {
     public String direction;
     public int walkingTime = 0;
     public boolean isWalking;
+
+    public Rectangle collisionBounds;
+    public boolean collided = false;
 }

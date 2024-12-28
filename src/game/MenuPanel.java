@@ -8,9 +8,6 @@ import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel {
 
-    GamePanel gP;
-    Game game;
-
     // guziki
     JButton startGame = new JButton("Start Game");
     JButton exitGame = new JButton("Exit");

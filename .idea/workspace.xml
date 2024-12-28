@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f87d2340-b613-4a84-81fc-ce7b1db1db14" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/maps/map1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/MenuPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/CollisionDetector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/background/MapElementManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/MapElementManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/MenuPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +114,15 @@
       <workItem from="1733215062677" duration="3457000" />
       <workItem from="1733260314225" duration="3498000" />
       <workItem from="1733295158025" duration="5855000" />
-      <workItem from="1733306969977" duration="5251000" />
+      <workItem from="1733306969977" duration="9636000" />
+      <workItem from="1733316911833" duration="20000" />
+      <workItem from="1733335719309" duration="6269000" />
+      <workItem from="1733500897768" duration="987000" />
+      <workItem from="1733512529005" duration="195000" />
+      <workItem from="1733567902153" duration="832000" />
+      <workItem from="1733599363897" duration="835000" />
+      <workItem from="1733600770393" duration="96000" />
+      <workItem from="1735382543360" duration="11137000" />
     </task>
     <servers />
   </component>

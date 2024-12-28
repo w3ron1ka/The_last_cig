@@ -20,6 +20,8 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
 
     // zmienne gracza i klawiatury
     KeyHandler keyHandler = new KeyHandler();
+
+    public CollisionDetector collisionDetector = new CollisionDetector(this);
     Player player = new Player(this, keyHandler);
 
     // mapa

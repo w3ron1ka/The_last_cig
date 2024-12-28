@@ -20,14 +20,17 @@ public class Player extends Entity{
     public Player(GamePanel gP, KeyHandler kH) {
         this.gP = gP;
         this.keyHandler = kH;
+
+        collisionBounds = new Rectangle(21,9,15,42);
+
         setDefaultPosition();
         getImage();
 
     }
 
     public void setDefaultPosition() {
-        x = 100;
-        y = 100;
+        x = 48;
+        y = 48;
         speed = 4;
         direction = "Down";
     }
@@ -51,20 +54,42 @@ public class Player extends Entity{
         if(keyHandler.goUp || keyHandler.goDown || keyHandler.goRight || keyHandler.goLeft){
             if(keyHandler.goUp){        // to samo co: keyHandler.goUp == true
                 direction = "Up";
-                y -= speed;
+                //y -= speed;
             }
             else if(keyHandler.goDown){
                 direction = "Down";
-                y += speed;
+               // y += speed;
             }
             else if(keyHandler.goRight){
                 direction = "Right";
-                x += speed;
+               // x += speed;
             }
             else if(keyHandler.goLeft){
                 direction = "Left";
-                x -= speed;
+               // x -= speed;
             }
+            // sprawdzamy kolizje
+            collided = false;
+            gP.collisionDetector.checkCollision(this);
+
+            if (collided == false) {
+                switch (direction) {
+                    case "Up":
+                        y -= speed;
+                        break;
+                    case "Down":
+                        y += speed;
+                        break;
+                    case "Right":
+                        x += speed;
+                        break;
+                    case "Left":
+                        x -= speed;
+                        break;
+
+                }
+            }
+
             // zmiana ikonki zeby postac chodzila zmieniala nogi, sprawdzamy czy idzie?
                 walkingTime++;
                 if (walkingTime > 11) {
