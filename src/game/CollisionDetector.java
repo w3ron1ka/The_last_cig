@@ -34,7 +34,7 @@ public class CollisionDetector {
                 }
                 break;
             case "Down":
-                entityBottomRow = (entityBottomY - entity.speed)/gamePanel.dispGridSize;
+                entityBottomRow = (entityBottomY + entity.speed)/gamePanel.dispGridSize;
                 mapElementNumber1 = gamePanel.mapEl.map[entityLeftCol][entityBottomRow];
                 mapElementNumber2 = gamePanel.mapEl.map[entityRightCol][entityBottomRow];
                 if (gamePanel.mapEl.mapElements[mapElementNumber1].collision == true || gamePanel.mapEl.mapElements[mapElementNumber2].collision == true) {
@@ -50,7 +50,7 @@ public class CollisionDetector {
                 }
                 break;
             case "Right":
-                entityRightCol = (entityRightX - entity.speed)/gamePanel.dispGridSize;
+                entityRightCol = (entityRightX + entity.speed)/gamePanel.dispGridSize;
                 mapElementNumber1 = gamePanel.mapEl.map[entityRightCol][entityBottomRow];
                 mapElementNumber2 = gamePanel.mapEl.map[entityRightCol][entityTopRow];
                 if (gamePanel.mapEl.mapElements[mapElementNumber1].collision == true || gamePanel.mapEl.mapElements[mapElementNumber2].collision == true) {

@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f87d2340-b613-4a84-81fc-ce7b1db1db14" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/game/CollisionDetector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/MapElementManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/MapElementManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/MenuPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/CollisionDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/CollisionDetector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +117,9 @@
       <workItem from="1733567902153" duration="832000" />
       <workItem from="1733599363897" duration="835000" />
       <workItem from="1733600770393" duration="96000" />
-      <workItem from="1735382543360" duration="11137000" />
+      <workItem from="1735382543360" duration="13975000" />
+      <workItem from="1735550103465" duration="270000" />
+      <workItem from="1735842093893" duration="542000" />
     </task>
     <servers />
   </component>
