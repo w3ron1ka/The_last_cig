@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f87d2340-b613-4a84-81fc-ce7b1db1db14" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/cigarette/cig_back1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cigarette/cig_back2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cigarette/cig_front1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cigarette/cig_front2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cigarette/cig_lewo1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cigarette/cig_lewo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cigarette/cig_prawo1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cigarette/cig_prawo2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/CollisionDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/CollisionDetector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GamePanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,28 +41,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Game.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.uruchamicprobuje.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Lenovo/Documents/MyGame/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Game.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.uruchamicprobuje.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/Documents/MyGame/resources/cigarette",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/Lenovo/Documents/MyGame/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\Documents\MyGame\resources\cigarette" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\Documents\MyGame\resources\maps" />
       <recent name="C:\Users\Lenovo\Documents\MyGame\resources\background" />
@@ -119,7 +132,7 @@
       <workItem from="1733600770393" duration="96000" />
       <workItem from="1735382543360" duration="13975000" />
       <workItem from="1735550103465" duration="270000" />
-      <workItem from="1735842093893" duration="542000" />
+      <workItem from="1735842093893" duration="3269000" />
     </task>
     <servers />
   </component>

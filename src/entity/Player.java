@@ -21,7 +21,7 @@ public class Player extends Entity{
         this.gP = gP;
         this.keyHandler = kH;
 
-        collisionBounds = new Rectangle(20,9,14,38);
+        collisionBounds = new Rectangle(20,18,14,29);
 
         setDefaultPosition();
         getImage();

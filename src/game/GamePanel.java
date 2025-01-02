@@ -1,6 +1,7 @@
 package game;
 
 import background.MapElementManager;
+import entity.Cigarette;
 import entity.Player;
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,8 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     // mapa
     MapElementManager mapEl = new MapElementManager(this);
 
+    // papieros
+    Cigarette cigarette = new Cigarette(this);
     //konstruktor
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -72,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         Graphics2D g2d = (Graphics2D) g;    // ma wiecej funkcji 2d
         mapEl.draw(g2d);    // mapa pod graczem
         player.draw(g2d);
+        cigarette.draw(g2d);
 
         g2d.dispose();      // oszczedza pamiec
 
