@@ -7,24 +7,110 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Cigarette extends Entity {
     GamePanel gP;
+    Player player;
+    protected int randomNum = 0;
 
     public Cigarette(GamePanel gP) {
+        super(gP);
         this.gP = gP;
-       //collisionBounds = new Rectangle(20,18,14,29);
-
+       // dobre na cig collisionBounds = new Rectangle(20,4,8,40);
+        collisionBounds = new Rectangle(15,4,21,40);
         setDefaultPosition();
         getImage();
+    }
 
+    public void setPlayer(Player player) {  // bo player null inaczej
+        this.player = player;
+    }
+
+    public void behave() {
+        Random random = new Random();
+        walkingCounter++;
+        if (walkingCounter == 40 || collided) {
+            if (player != null) {
+//                if (collided){
+//
+//                }
+                //else {
+                    followPlayer(player);
+               // }
+
+            }
+            else {
+                randomNum = random.nextInt(4);
+            }
+            switch (randomNum) {
+                case 0:
+                    direction = "Up";
+                    break;
+                case 1:
+                    direction = "Down";
+                    break;
+                case 2:
+                    direction = "Right";
+                    break;
+                case 3:
+                    direction = "Left";
+                    break;
+            }
+            walkingCounter = 0;
+        }
+        showCoordinates(x,y,gP);
+    }
+
+    public void followPlayer(Player player) {
+        this.player = player;
+
+        int deltaX = player.x - x;
+        int deltaY = player.y - y;
+
+        if(Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (deltaX > 0) {
+                randomNum = 2;  // Gracz jest po prawej stronie
+            }
+            else {
+                randomNum = 3;  // Gracz jest po lewej stronie
+            }
+        }
+        else {
+            if (deltaY > 0) {
+                randomNum = 1;  // Gracz jest poniżej
+            } else {
+                randomNum = 0;  // Gracz jest powyżej
+            }
+        }
+
+//        if (player.x -x <= 500){
+//            randomNum =2;
+//        }
+//        else if (x - player.x >= -500){
+//            randomNum =3;
+//        }
+//        else if (player.y -y <= 500){
+//            randomNum =1;
+//        }
+//        else if (y - player.y >= -500){
+//            randomNum =0;
+//        }
     }
 
     public void setDefaultPosition() {
         x = 96;
-        y = 48;
-        speed = 4;
+        y = 46;
+        speed = 2;
         direction = "Down";
+    }
+    public void showCoordinates(int x, int y, GamePanel gP) {
+        x= this.x;
+        y= this.y;
+        this.gP = gP;
+        gP.labelCig.setText("Cig coordinates X: " + x + " Y: " + y);
     }
     public void getImage(){
         try {

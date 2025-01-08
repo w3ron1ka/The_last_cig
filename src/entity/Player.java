@@ -21,7 +21,7 @@ public class Player extends Entity{
         this.gP = gP;
         this.keyHandler = kH;
 
-        collisionBounds = new Rectangle(20,18,14,29);
+        collisionBounds = new Rectangle(15,18,21,29);
 
         setDefaultPosition();
         getImage();
@@ -86,10 +86,8 @@ public class Player extends Entity{
                     case "Left":
                         x -= speed;
                         break;
-
                 }
             }
-
             // zmiana ikonki zeby postac chodzila zmieniala nogi, sprawdzamy czy idzie?
                 walkingTime++;
                 if (walkingTime > 11) {
@@ -102,9 +100,15 @@ public class Player extends Entity{
                 }
             // if (keyHandler.keyReleased(keyHandler.key)) mozna pokombinowac zeby jak sie zatrzymujesz to byl statyczny
         }
-
+        showCoordinates(x,y,gP);
     }
 
+    public void showCoordinates(int x, int y, GamePanel gP) {
+        x= this.x;
+        y= this.y;
+        this.gP = gP;
+        gP.label.setText("Player coordinates X: " + x + " Y: " + y);
+    }
     public void draw(Graphics2D g2d) {
         BufferedImage image = imageDown1;
         switch(direction){

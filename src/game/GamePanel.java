@@ -2,9 +2,11 @@ package game;
 
 import background.MapElementManager;
 import entity.Cigarette;
+import entity.Entity;
 import entity.Player;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable { //runnable jest do thread
 
@@ -19,17 +21,21 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     public final int screenHeight = screenRow * dispGridSize;
     int FPS = 60;
 
-    // zmienne gracza i klawiatury
+    // zmienne gracza, bytow i klawiatury
     KeyHandler keyHandler = new KeyHandler();
 
     public CollisionDetector collisionDetector = new CollisionDetector(this);
     Player player = new Player(this, keyHandler);
 
+    Cigarette cigarette = new Cigarette(this);
+
+    // lista bytow na pozniej
+    ArrayList<Entity> entities = new ArrayList<>();
+
     // mapa
     MapElementManager mapEl = new MapElementManager(this);
 
-    // papieros
-    Cigarette cigarette = new Cigarette(this);
+
     //konstruktor
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -37,9 +43,12 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);    // gra jest caly czas "gotowa" na nacisniecie klawisza
-
+        add(label);
+        add(labelCig);
+        setVisible(true);
     }
-
+    public Label label = new Label("Player");
+    public Label labelCig = new Label("Cig");
     // watek gry
     Thread thread;
     public void startThread(){
@@ -69,6 +78,8 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     }
     public void update(){
         player.update();
+        cigarette.setPlayer(player);
+        cigarette.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
