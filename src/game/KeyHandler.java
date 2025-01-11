@@ -8,7 +8,12 @@ public class KeyHandler implements KeyListener {
 
     public boolean goUp, goDown, goLeft, goRight;
     public int key;
-   // GamePanel gP;
+    GamePanel gP;
+
+    public KeyHandler(GamePanel gP) {
+        this.gP = gP;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -28,6 +33,15 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_LEFT:
                 goLeft = true;
+                break;
+            case KeyEvent.VK_P:
+                if (gP.gamePhase == gP.playPhase) {
+                    gP.gamePhase = gP.pausedPhase;
+                }
+                else if (gP.gamePhase == gP.pausedPhase) {
+                    gP.gamePhase = gP.playPhase;
+                }
+
                 break;
         }
     }

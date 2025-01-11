@@ -11,6 +11,7 @@ public class CollisionDetector {
         this.gamePanel = gamePanel;
     }
 
+
     public void checkCollision(Entity entity) {
 
         int entityLeftX = entity.x + entity.collisionBounds.x;
@@ -59,4 +60,8 @@ public class CollisionDetector {
                 break;
         }
     }
+//moze jednak tego nie robie v
+//    public void checkEntityCollision(Entity entity, Entity e2) {
+//
+//    }
 }

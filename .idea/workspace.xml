@@ -5,11 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f87d2340-b613-4a84-81fc-ce7b1db1db14" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/buttons/exit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/buttons/lvl1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/buttons/lvl2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/buttons/lvl3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/buttons/menu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/buttons/play.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/maps/map1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/maps/map1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Cigarette.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Cigarette.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/CollisionDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/CollisionDetector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/KeyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/MenuPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +72,7 @@
       <recent name="C:\Users\Lenovo\Documents\MyGame\resources\cigarette" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\Documents\MyGame\resources\buttons" />
       <recent name="C:\Users\Lenovo\Documents\MyGame\resources\maps" />
       <recent name="C:\Users\Lenovo\Documents\MyGame\resources\background" />
       <recent name="C:\Users\Lenovo\Documents\MyGame\resources\player" />
@@ -127,7 +138,7 @@
       <workItem from="1735382543360" duration="13975000" />
       <workItem from="1735550103465" duration="270000" />
       <workItem from="1735842093893" duration="24611000" />
-      <workItem from="1736331656142" duration="16026000" />
+      <workItem from="1736331656142" duration="73237000" />
     </task>
     <servers />
   </component>

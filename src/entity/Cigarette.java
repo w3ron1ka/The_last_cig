@@ -21,7 +21,7 @@ public class Cigarette extends Entity {
         this.gP = gP;
        // dobre na cig collisionBounds = new Rectangle(20,4,8,40);
         collisionBounds = new Rectangle(15,4,21,40);
-        setDefaultPosition();
+        setDefaultPosition(540,386,2);
         getImage();
     }
 
@@ -32,14 +32,17 @@ public class Cigarette extends Entity {
     public void behave() {
         Random random = new Random();
         walkingCounter++;
+
         if (walkingCounter == 40 || collided) {
             if (player != null) {
-//                if (collided){
-//
-//                }
-                //else {
+               if (collided){
+                   randomNum = random.nextInt(4);
+                   walkingCounter = 0;
+
+               }
+               else {
                     followPlayer(player);
-               // }
+               }
 
             }
             else {
@@ -72,17 +75,50 @@ public class Cigarette extends Entity {
 
         if(Math.abs(deltaX) > Math.abs(deltaY)) {
             if (deltaX > 0) {
-                randomNum = 2;  // Gracz jest po prawej stronie
+                if (!collided) {
+                    randomNum = 2;  // Gracz jest po prawej stronie
+                }
+                else if (deltaY < 0) {
+                    randomNum = 1;
+                }
+                else if (deltaY > 0) {
+                    randomNum = 0;
+                }
             }
             else {
-                randomNum = 3;  // Gracz jest po lewej stronie
+                if (!collided) {
+                    randomNum = 3;  // Gracz jest po lewej stronie
+                }
+                else if (deltaY < 0) {
+                    randomNum = 1;
+                }
+                else if (deltaY > 0) {
+                    randomNum = 0;
+                }
             }
         }
         else {
             if (deltaY > 0) {
-                randomNum = 1;  // Gracz jest poniżej
-            } else {
-                randomNum = 0;  // Gracz jest powyżej
+                if (!collided) {
+                    randomNum = 1;  // Gracz jest poniżej
+                }
+                else if (deltaX < 0) {
+                    randomNum = 3;
+                }
+                else if (deltaX > 0) {
+                    randomNum = 2;
+                }
+            }
+            else {
+                if (!collided) {
+                    randomNum = 0;  // Gracz jest powyżej
+                }
+                else if (deltaX < 0) {
+                    randomNum = 3;
+                }
+                else if (deltaX > 0) {
+                    randomNum = 2;
+                }
             }
         }
 
@@ -100,12 +136,16 @@ public class Cigarette extends Entity {
 //        }
     }
 
-    public void setDefaultPosition() {
-        x = 96;
-        y = 46;
-        speed = 2;
+    public void setDefaultPosition(int x, int y, int speed) {
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+//        x = 540;
+//        y = 386;
+//        speed = 2;
         direction = "Down";
     }
+
     public void showCoordinates(int x, int y, GamePanel gP) {
         x= this.x;
         y= this.y;
