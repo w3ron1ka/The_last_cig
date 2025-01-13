@@ -1,10 +1,9 @@
 package entity;
 
-import game.BarPanel;
 import game.Game;
 import game.GamePanel;
 import game.KeyHandler;
-import game.BarPanel;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,13 +17,14 @@ import java.util.ArrayList;
 public class Player extends Entity{
     KeyHandler keyHandler;
     GamePanel gP;
-    BarPanel addictionPanel;
     int smokedCigs = 0;
     public int addicted = 0;
     int health;
     int smokingCounter =0;
     public int max_addiction = 100;
-    JProgressBar addictionBar;
+    public int resetCollisionBoundX = 15;
+    public int resetCollisionBoundY = 18;
+    public int wallet = 0;
 
     public Player(GamePanel gP, KeyHandler kH) {
         this.gP = gP;
@@ -46,6 +46,14 @@ public class Player extends Entity{
         direction = "Down";
     }
 
+    public void pickUpCoin(int coinIndex){
+        if (coinIndex != 666){
+            wallet++;
+            gP.coins[coinIndex] =null;
+            System.out.println("twoje pieniazki: "+wallet);
+        }
+    }
+
     public void smoke(ArrayList<Cigarette> cigarettes){
         for (Cigarette cig : cigarettes){
             int deltaX = cig.x - x;
@@ -59,7 +67,8 @@ public class Player extends Entity{
                     smokedCigs++;
                     System.out.println("Wypalone szlugi: "+smokedCigs);
                     smokingCounter = 0;
-                    addicted = smokedCigs/2;
+                    addicted = smokedCigs/3;
+                    //gP.playSoundEffect(1);
                 }
             }
             else if (Math.abs(deltaY) < 3 && Math.abs(deltaX) < 30){
@@ -70,43 +79,16 @@ public class Player extends Entity{
                     smokedCigs++;
                     System.out.println("Wypalone szlugi: "+smokedCigs);
                     smokingCounter = 0;
-                    addicted = smokedCigs/2;
+                    addicted = smokedCigs/3;
+                    //gP.playSoundEffect(1);
                 }
             }
             if (addicted < max_addiction){
                 //addictionPanel.updateAddictionBar();
-                gP.updateAddictionBar();
+                gP.barDisplayer.updateAddictionBar();
             }
         }
     }
-
-//    public void updateAddictionBar(GamePanel gP){
-//        this.gP = gP;
-//
-//        // dodac ze jesli lvl jakis to wtedy mniej czy wiecej jest max_addiction
-//        if (gP.addictionBar != null) {
-//            addictionBar.setValue(addicted);
-//        }
-//        else {                              // nie mozna w kolko tworzyc paska, tylko raz
-//            gP.addictionBar = new JProgressBar(0,max_addiction);
-//            gP.addictionBar.setStringPainted(true); // procenty
-//            //addictionBar.setSize(100,40);
-//            //addictionBar.setLocation(48, 48);
-//            gP.addictionBar.setBorderPainted(true);
-//            gP.addictionBar.setForeground(Color.RED); // Kolor paska
-//            gP.addictionBar.setValue(0);
-//            gP.addictionBar.setVisible(true);
-//            gP.add(addictionBar);
-//
-//            gP.revalidate();
-//            gP.repaint();
-//        }
-//    }
-//    public void updateAddictionBar() {
-//        if (addictionBar != null) {
-//            addictionBar.setValue(addicted);
-//        }
-//    }
 
     public void getImage(){
         try {
@@ -129,25 +111,24 @@ public class Player extends Entity{
         if(keyHandler.goUp || keyHandler.goDown || keyHandler.goRight || keyHandler.goLeft){
             if(keyHandler.goUp){        // to samo co: keyHandler.goUp == true
                 direction = "Up";
-                //y -= speed;
             }
             else if(keyHandler.goDown){
                 direction = "Down";
-               // y += speed;
             }
             else if(keyHandler.goRight){
                 direction = "Right";
-               // x += speed;
             }
             else if(keyHandler.goLeft){
                 direction = "Left";
-               // x -= speed;
             }
-            // sprawdzamy kolizje
+            // sprawdzamy kolizje z elementami mapy i monetami
             collided = false;
             gP.collisionDetector.checkCollision(this);
 
-            if (collided == false) {
+            int coinIndex = gP.collisionDetector.checkCoin(this);
+            pickUpCoin(coinIndex);
+
+            if (!collided) {
                 switch (direction) {
                     case "Up":
                         y -= speed;
@@ -211,5 +192,9 @@ public class Player extends Entity{
                 break;
         }
         g2d.drawImage(image, x, y, gP.dispGridSize, gP.dispGridSize, null);
+        g2d.setColor(Color.RED);
+
+        // roboczo sprawdzanie granic do kolizji
+        //g2d.drawRect(x + collisionBounds.x, y+ collisionBounds.y, collisionBounds.width, collisionBounds.height);
     }
 }

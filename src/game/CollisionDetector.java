@@ -1,6 +1,7 @@
 package game;
 
 import entity.Entity;
+import entity.Player;
 
 import java.awt.*;
 
@@ -59,9 +60,59 @@ public class CollisionDetector {
                 }
                 break;
         }
+
+
     }
 //moze jednak tego nie robie v
 //    public void checkEntityCollision(Entity entity, Entity e2) {
 //
 //    }
+
+    public int checkCoin(Player player){
+
+        int index = 666;
+
+        for (int i =0; i<gamePanel.coins.length; i++){
+            if(gamePanel.coins[i] != null){
+                // granice gracza
+                player.collisionBounds.x = player.x + player.collisionBounds.x;
+                player.collisionBounds.y = player.y + player.collisionBounds.y;
+                // granice monet
+                gamePanel.coins[i].collisionBounds.x = gamePanel.coins[i].x + gamePanel.coins[i].collisionBounds.x;
+                gamePanel.coins[i].collisionBounds.y = gamePanel.coins[i].y + gamePanel.coins[i].collisionBounds.y;
+
+                switch(player.direction){       // intersect sprawdza czy nachodza na siebie rect monety i gracza
+                    case "Up":
+                        player.collisionBounds.y -= player.speed;
+                       if(player.collisionBounds.intersects(gamePanel.coins[i].collisionBounds)){
+                           index = i;
+                       }
+                       break;
+                    case "Down":
+                        player.collisionBounds.y += player.speed;
+                        if(player.collisionBounds.intersects(gamePanel.coins[i].collisionBounds)){
+                            index = i;
+                        }
+                        break;
+                    case "Right":
+                        player.collisionBounds.x += player.speed;
+                        if(player.collisionBounds.intersects(gamePanel.coins[i].collisionBounds)){
+                            index = i;
+                        }
+                        break;
+                    case "Left":
+                        player.collisionBounds.x -= player.speed;
+                        if(player.collisionBounds.intersects(gamePanel.coins[i].collisionBounds)){
+                            index = i;
+                        }
+                        break;
+                }
+                player.collisionBounds.x = player.resetCollisionBoundX;
+                player.collisionBounds.y = player.resetCollisionBoundY;
+                gamePanel.coins[i].collisionBounds.x = gamePanel.coins[i].resetCollisionBoundX;
+                gamePanel.coins[i].collisionBounds.y = gamePanel.coins[i].resetCollisionBoundY;
+            }
+        }
+        return index;
+    }
 }

@@ -29,6 +29,8 @@ public class Game {
         MenuPanel menuPanel = new MenuPanel(cardLayout, mainPanel);
         GamePanel gPanel = new GamePanel(cardLayout, mainPanel);
         GamePanel gPanel2 = new GamePanel(cardLayout, mainPanel);
+        LevelChecker levelChecker = new LevelChecker();
+
         gPanel2.mapEl.getMap("/maps/mapkaProbna.txt");
         gPanel2.player.setDefaultPosition(212,142,3);
         gPanel2.cigarette.setDefaultPosition(428,382,3);
@@ -38,9 +40,9 @@ public class Game {
 
 
         GamePanel gPanel3 = new GamePanel(cardLayout, mainPanel);
-        //BarPanel addictionBar = new BarPanel();
 
 
+        gPanel.gameSettings();
         gPanel.startThread();
 
        // gPanel2.startThread();

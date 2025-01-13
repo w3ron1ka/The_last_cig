@@ -20,7 +20,7 @@ public class Cigarette extends Entity {
         super(gP);
         this.gP = gP;
        // dobre na cig collisionBounds = new Rectangle(20,4,8,40);
-        collisionBounds = new Rectangle(15,4,21,40);
+        collisionBounds = new Rectangle(12,5,22,40);
         setDefaultPosition(540,386,2);
         getImage();
     }
@@ -204,5 +204,9 @@ public class Cigarette extends Entity {
                 break;
         }
         g2d.drawImage(image, x, y, gP.dispGridSize, gP.dispGridSize, null);
+        g2d.setColor(Color.RED);
+
+        // roboczo sprawdzanie granic do kolizji
+        //g2d.drawRect(x + collisionBounds.x, y+ collisionBounds.y, collisionBounds.width, collisionBounds.height);
     }
 }

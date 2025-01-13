@@ -35,6 +35,9 @@ public class MapElementManager {
             e.printStackTrace();
         }
     }
+//    public int[][] getCollision (String mapPath){
+//
+//    }
     public void getMap(String mapPath) {
         try {
             InputStream iStream = getClass().getResourceAsStream(mapPath);
@@ -62,7 +65,6 @@ public class MapElementManager {
     }
 
     public void draw(Graphics2D g2d){
-       // g2d.drawImage(mapElements[0].image,0,0, gP.dispGridSize, gP.dispGridSize, null);
 
         int col = 0, row = 0, x = 0, y = 0;
 
@@ -80,7 +82,5 @@ public class MapElementManager {
                 y += gP.dispGridSize;
             }
         }
-        //g2d.drawImage(mapElements[2].image,48,48, gP.dispGridSize, gP.dispGridSize, null);
-
     }
 }
