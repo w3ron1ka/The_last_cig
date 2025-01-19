@@ -26,38 +26,36 @@ public class Game {
         JPanel mainPanel = new JPanel(cardLayout);
         mainPanel.setPreferredSize(new Dimension(1248, 768));
 
-        MenuPanel menuPanel = new MenuPanel(cardLayout, mainPanel);
+        MenuPanel menuPanel = new MenuPanel(cardLayout, mainPanel );
         GamePanel gPanel = new GamePanel(cardLayout, mainPanel);
-        GamePanel gPanel2 = new GamePanel(cardLayout, mainPanel);
-        LevelChecker levelChecker = new LevelChecker();
+        menuPanel.setGamePanel(gPanel);
+        //GamePanel gPanel2 = new GamePanel(cardLayout, mainPanel);
+        //Level levelChecker = new Level();
 
-        gPanel2.mapEl.getMap("/maps/mapkaProbna.txt");
-        gPanel2.player.setDefaultPosition(212,142,3);
-        gPanel2.cigarette.setDefaultPosition(428,382,3);
+//        gPanel2.mapEl.getMap("/maps/map2.txt");
+//        gPanel2.player.setDefaultPosition(212,142,3);
+//        gPanel2.cigarette.setDefaultPosition(428,382,3);
 //        for(Cigarette cig : gPanel2.cigarettes){
 //            gPanel2.cig.setDefaultPosition();
 //        }
 
 
-        GamePanel gPanel3 = new GamePanel(cardLayout, mainPanel);
+        //GamePanel gPanel3 = new GamePanel(cardLayout, mainPanel);
 
 
         gPanel.gameSettings();
+
         gPanel.startThread();
 
        // gPanel2.startThread();
 
         mainPanel.add(menuPanel, "Menu");
         mainPanel.add(gPanel, "Game");
-        mainPanel.add(gPanel2, "Game2");
-        mainPanel.add(gPanel3, "Game3");
-//        mainPanel.add(addictionBar, "Addiction");
+        //mainPanel.add(gPanel2, "Game2");
+        //mainPanel.add(gPanel3, "Game3");
         cardLayout.show(mainPanel, "Menu");
         window.add(mainPanel);
         window.pack();      // okno bedzie dostosowywac sie do rzomiaru panelu
         window.setVisible(true);
-
-
-
     }
 }

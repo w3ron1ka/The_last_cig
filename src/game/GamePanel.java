@@ -34,28 +34,28 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     public Displayer textDisplayer = new Displayer(this);
     public Displayer barDisplayer = new Displayer(this);
     CoinSetter coinSetter = new CoinSetter(this);
-
-    public JPanel addictionPanel;
-    public JProgressBar addictionBar;
+    LevelManager levelManager;
+    public int currentLevel = 0;
+    public CollisionDetector collisionDetector = new CollisionDetector(this);
 
     // dzwiek
     Sound melody = new Sound();
     Sound soundEffect = new Sound();
 
-    public CollisionDetector collisionDetector = new CollisionDetector(this);
     // gracz, byty, obiekty
     Player player = new Player(this, keyHandler);
 
-    Cigarette cigarette = new Cigarette(this);
-    Cigarette cig2 = new Cigarette(this);
-    Cigarette cig3 = new Cigarette(this);
-    Cigarette cig4 = new Cigarette(this);
+    int cigCount = 1;
+//    Cigarette cigarette = new Cigarette(this);
+//    Cigarette cig2 = new Cigarette(this);
+//    Cigarette cig3 = new Cigarette(this);
+//    Cigarette cig4 = new Cigarette(this);
 
-    public Coin coins[] = new Coin[20];
+    public Coin coins[] = new Coin[40];
 
-    // lista bytow na pozniej
-    ArrayList<Entity> entities = new ArrayList<>();
-    public ArrayList<Cigarette> cigarettes = new ArrayList<>();
+    // lista bytow
+    public ArrayList<Cigarette> cigarettes = new ArrayList<>(cigCount);     //dodane cigCount moze trza zmienic potem!!!
+
 
     // mapa
     MapElementManager mapEl = new MapElementManager(this);
@@ -64,6 +64,8 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     public int gamePhase;
     public final int playPhase = 1;
     public final int pausedPhase = 2;
+    public final int nextLevelPhase = 3;
+    public final int menuPhase = 4;
 
     //konstruktor
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
@@ -74,18 +76,13 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         this.setFocusable(true);    // gra jest caly czas "gotowa" na nacisniecie klawisza
         this.add(label);
         this.add(labelCig);
+        this.add(menu);
         gamePhase = playPhase;
 
-//// panel i pasek uzależnienia
-//        addictionPanel = new JPanel();
-//        addictionBar = new JProgressBar(0, player.max_addiction);
-//
-//        barDisplayer.initAddictionBar(addictionPanel, addictionBar);
-//
-//        addictionPanel.setPreferredSize(new Dimension(200,20));
-//        add(addictionPanel);
+        levelManager = new LevelManager();
+        loadLevel(levelManager.getCurrentLevel());
 
-//menu i listener
+//listener do menu
         menu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "Menu");
@@ -93,20 +90,20 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
 
             }
         });
-        setButton("resources/buttons/menu.png", "resources/buttons/menuClick.png");
-        this.add(menu);
-
         this.setVisible(true);
     }
 
     public void gameSettings(){
         playMelody(0);
-        //coinSetter.setCoin();
+        setButton("resources/buttons/menu.png", "resources/buttons/menuClick.png");
         // Inicjalizacja tablicy coins
         for (int i = 0; i < coins.length; i++) {
-            coins[i] = new Coin(); // Tworzenie nowego obiektu Coin dla każdego elementu
+            if (coins[i] == null) {
+                coins[i] = new Coin(); // trzeba stworzyc obiekty zanim sie je porozklada po planszy
+            }
         }
-        coinSetter.setRandom();
+        coinSetter.setRandom(40);
+
     }
 // wyswietlane
     ImageIcon menuScaledIcon;
@@ -114,16 +111,8 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     public Label label = new Label("Player");
     public Label labelCig = new Label("Cig");
 
-
-
     // watek gry
     Thread thread;
-    public void stopThread() {
-        thread.interrupt();
-    }
-    public void continueThread() {
-        thread.start();
-    }
     public void startThread(){
         thread = new Thread(this);
         thread.start();
@@ -141,61 +130,86 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
             delta += (currentTime - lastTime) / render;     // metoda delty
             lastTime = currentTime;
 
-            if (delta >= 1) {
+            if (delta >= 1 && gamePhase == playPhase) {
                 update();   // odswieza info o pozycji gracza np
                 repaint();  // rysuje od nowa ekran z ta info z update
                 delta = 0;
             }
-
         }
     }
 
     public void update(){
         if (gamePhase == playPhase) {
+            createCigarettes(1);
+
+            for (Cigarette cig : cigarettes){
+                cig.setPlayer(player);
+                cig.update();
+            }
             player.update();
-            cigarette.setPlayer(player);
-            cigarette.update();
-            cig2.setPlayer(player);
-            cig2.update();
-            cig3.setPlayer(player);
-            cig3.update();
-            cig4.setPlayer(player);
-            cig4.update();
-            cigarettes.add(cigarette);
-            cigarettes.add(cig2);
-            cigarettes.add(cig3);
-            cigarettes.add(cig4);
+//            cigarette.setPlayer(player);
+//            cigarette.update();
+//            cig2.setPlayer(player);
+//            cig2.update();
+//            cig3.setPlayer(player);
+//            cig3.update();
+//            cig4.setPlayer(player);
+//            cig4.update();
+
+//            cigarettes.add(cigarette);
+//            cigarettes.add(cig2);
+//            cigarettes.add(cig3);
+//            cigarettes.add(cig4);
+
         }
         else if (gamePhase == pausedPhase) {
             Graphics2D g2d = (Graphics2D) this.getGraphics();
             textDisplayer.drawPause(g2d);
         }
-
     }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;    // ma wiecej funkcji 2d
         mapEl.draw(g2d);    // mapa pod graczem
        // coins[0].draw(g2d,this);
-        for(int i = 0; i< coins.length; i++){
-            if (coins[i] != null){
-                coins[i].draw(g2d,this);
+        for (Coin coin : coins) {
+            if (coin != null) {
+                coin.draw(g2d, this);
             }
         }
         player.draw(g2d);
-        cigarette.draw(g2d);
-        cig2.draw(g2d);
-        cig3.draw(g2d);
-        cig4.draw(g2d);
+
+//        cigarette.draw(g2d);
+//        cig2.draw(g2d);
+//        cig3.draw(g2d);
+//        cig4.draw(g2d);
+
+        for (Cigarette cig : cigarettes) {
+            if (cig != null) {
+                cig.draw(g2d);
+            }
+        }
 
         textDisplayer.drawCoin(g2d);
         textDisplayer.drawCigPack(g2d);
         textDisplayer.drawPause(g2d);
-        //displayer.updateAddictionBar();
+
         g2d.dispose();      // oszczedza pamiec
     }
 
+    public void createCigarettes(int cigCount){
+        this.cigCount = cigCount;
 
+        while (cigarettes.size() < cigCount){
+            cigarettes.add(new Cigarette(this));
+        }
+    }
+    public void removeCig(int cigIndex){
+        if (cigIndex != 666){
+            cigarettes.clear();
+        }
+    }
 
     public void playMelody(int i){
         melody.setFile(0);
@@ -206,10 +220,54 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     public void playSoundEffect(int i){
         soundEffect.setFile(i);
         soundEffect.play();
-
     }
     public void pauseMelody(){
         melody.stop();
+    }
+
+    public void loadLevel(Level level) {
+        // bo wyrzucalo ConcurrentModificationException bez tego, ochrona przed wieloma watkami, blokada?
+        synchronized (cigarettes){      // zeby po powrocie z 3lvl nie bylo juz 12 cig a mniej
+            cigarettes.clear();
+            createCigarettes(level.getCigarettesCount());
+        }
+
+        mapEl.getMap(level.getMapFilePath());
+        coinSetter.setRandom(level.getCoinsCount());
+        player.setDefaultPosition(48,48,2);
+
+        //createCigarettes(level.getCigarettesCount());
+
+        for (int i = 0; i < coins.length; i++){
+            coins[i] = null;        // usuwanie starych monet przed nowym lvl
+        }
+        coinSetter.setRandom(level.getCoinsCount());
+    }
+    public void nextLevel(){
+        Graphics2D g2d = (Graphics2D) this.getGraphics();
+        synchronized (cigarettes){
+            if (levelManager.nextLevel()){
+                loadLevel(levelManager.getCurrentLevel());
+                textDisplayer.resetCigPack(g2d);
+            }
+            else {
+                System.out.println("koniec lvl!");
+            }
+        }
+
+    }
+
+    public void stopGame() {
+        if (thread != null && thread.isAlive()) {
+            thread.interrupt();                     // zatrzymuje watek
+        }
+    }
+
+    public void resumeGame() {
+        if (thread == null || !thread.isAlive()) {
+            thread = new Thread(this);         // robi nowy watek(ten)
+            thread.start();
+        }
     }
 
     public void setButton(String buttonPath, String buttonHoverPath){
@@ -242,22 +300,24 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
 
 class CoinSetter {
     GamePanel gP;
-
+    int coinsNum = 10;
     public CoinSetter(GamePanel gP) {
         this.gP = gP;
-
     }
     public void setCoin(){
         gP.coins[0] = new Coin();
         gP.coins[0].x = 3 * gP.dispGridSize+ gP.dispGridSize/3;
         gP.coins[0].y = 6 * gP.dispGridSize+ gP.dispGridSize/3;
     }
-    public void setRandom(){
+    public void setRandom(int coinsNum){
+        this.coinsNum = coinsNum;
         int coinX, coinY;
         Random random = new Random();
-        //gP.mapEl.getMap("/maps/map1.txt");
 
-        for (int i =0; i<gP.coins.length; i++){
+        for (int i =0; i < coinsNum; i++){
+            if (gP.coins[i] == null){
+                gP.coins[i] = new Coin();
+            }
             coinX = random.nextInt(1,24);
             coinY = random.nextInt(1,13);
             gP.coins[i].x = coinX * gP.dispGridSize+ gP.dispGridSize/3;

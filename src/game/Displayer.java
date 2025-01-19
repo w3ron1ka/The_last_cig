@@ -26,32 +26,6 @@ public class Displayer {
         coinImage =coin.image;
     }
 
-    // uzaleznienie chyba do wywalenia
-    public void initAddictionBar(JPanel addictionPanel, JProgressBar addictionBar) {
-        this.addictionPanel = addictionPanel;
-        this.addictionBar = addictionBar;
-
-        // panel uzaleznienia
-        this.addictionPanel.setPreferredSize(new Dimension(200, 20));
-        this.addictionPanel.setLayout(new BorderLayout());
-        this.addictionPanel.setBackground(Color.LIGHT_GRAY);
-
-        // pasek uzaleznienia
-        this.addictionBar.setStringPainted(true); // Wyświetlanie procentów
-        this.addictionBar.setForeground(Color.RED); // Kolor paska
-        this.addictionBar.setValue(0); // Początkowa wartość
-        this.addictionBar.setDoubleBuffered(true);
-
-        this.addictionPanel.add(this.addictionBar, BorderLayout.CENTER);
-        this.addictionPanel.setVisible(true);
-    }
-    public void updateAddictionBar() {
-        if (addictionBar != null) {
-            addictionBar.setValue(gP.player.addicted);
-            addictionBar.revalidate();
-            addictionBar.repaint();
-        }
-    }
     // ikonka monet
 
     public void drawCoin(Graphics2D g2d){
@@ -88,12 +62,27 @@ public class Displayer {
         for (int i = 0; i < totalSlots; i++) {
             int xPosition = gP.dispGridSize * (startSlot + i);
 
-            // Sprawdź, czy slot powinien być pełny
+            // czy slot ma byc pelny
             if (gP.player.addicted >= (i + 1) * 3) {
                 g2d.drawImage(cigPackImage, xPosition, yPosition, slotWidth, slotHeight, null);
-            } else {
+            }
+            else {
                 g2d.drawImage(emptyCigPackImage, xPosition, yPosition, slotWidth, slotHeight, null);
             }
+        }
+
+    }
+    public void resetCigPack(Graphics2D g2d){
+        getCigPackImage();
+        int totalSlots = 10; // od 9 do 18 kratki
+        int startSlot = 9;
+        int slotWidth = gP.dispGridSize;
+        int slotHeight = gP.dispGridSize;
+        int yPosition = gP.dispGridSize * 15 - 24; // dla wszystkich slotow ten sam y
+
+        for (int i = 0; i < totalSlots; i++) {
+            int xPosition = gP.dispGridSize * (startSlot + i);
+            g2d.drawImage(emptyCigPackImage, xPosition, yPosition, slotWidth, slotHeight, null);
         }
     }
 

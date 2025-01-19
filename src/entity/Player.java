@@ -25,6 +25,7 @@ public class Player extends Entity{
     public int resetCollisionBoundX = 15;
     public int resetCollisionBoundY = 18;
     public int wallet = 0;
+    boolean levelUp;
 
     public Player(GamePanel gP, KeyHandler kH) {
         this.gP = gP;
@@ -50,42 +51,41 @@ public class Player extends Entity{
         if (coinIndex != 666){
             wallet++;
             gP.coins[coinIndex] =null;
-            System.out.println("twoje pieniazki: "+wallet);
+            //System.out.println("twoje pieniazki: "+wallet);
         }
     }
 
     public void smoke(ArrayList<Cigarette> cigarettes){
-        for (Cigarette cig : cigarettes){
-            int deltaX = cig.x - x;
-            int deltaY = cig.y - y;
+        synchronized (cigarettes){
+            // zwykla petla zamiast foreach nie powoduje wyjatku ConcurrentModificationException
+            for (int i = 0; i < cigarettes.size(); i++){
+                Cigarette cig = cigarettes.get(i);
 
-            if (Math.abs(deltaX) < 3 && Math.abs(deltaY) < 30){
-                smokingCounter++;
-                if  (smokingCounter == 1500) {
-                    System.out.println("deltaX: " + deltaX);
-                    System.out.println("deltaY: " + deltaY);
-                    smokedCigs++;
-                    System.out.println("Wypalone szlugi: "+smokedCigs);
-                    smokingCounter = 0;
-                    addicted = smokedCigs/3;
-                    //gP.playSoundEffect(1);
+                int deltaX = cig.x - x;
+                int deltaY = cig.y - y;
+                // bylo <3 i <30 i counter 1500
+                if ((Math.abs(deltaX) < 10 && Math.abs(deltaY) < 30) || (Math.abs(deltaY) < 3 && Math.abs(deltaX) < 30)){
+                    smokingCounter++;
+                    if  (smokingCounter == 10) {      //moze razy FPS
+                        System.out.println("deltaX: " + deltaX);
+                        System.out.println("deltaY: " + deltaY);
+                        smokedCigs++;
+                        System.out.println("Wypalone szlugi: "+smokedCigs);
+                        smokingCounter = 0;
+                        addicted = smokedCigs/3;
+                        //gP.playSoundEffect(1);
+                    }
                 }
-            }
-            else if (Math.abs(deltaY) < 3 && Math.abs(deltaX) < 30){
-                smokingCounter++;
-                if  (smokingCounter == 1500) {
-                    System.out.println("deltaX: " + deltaX);
-                    System.out.println("deltaY: " + deltaY);
-                    smokedCigs++;
-                    System.out.println("Wypalone szlugi: "+smokedCigs);
-                    smokingCounter = 0;
-                    addicted = smokedCigs/3;
-                    //gP.playSoundEffect(1);
+                if (addicted%30 == 0 && addicted != 0 && !levelUp){
+                    gP.nextLevel();
+                    levelUp = true;
+                    smokedCigs = 0;
+                    addicted = 0;
+                    //addicted++;
                 }
-            }
-            if (addicted < max_addiction){
-                //addictionPanel.updateAddictionBar();
-                gP.barDisplayer.updateAddictionBar();
+                if (addicted % 30 != 0){
+                    levelUp = false;
+                }
             }
         }
     }
@@ -107,7 +107,7 @@ public class Player extends Entity{
 
     public void update(){
         smoke(gP.cigarettes);
-        //updateAddictionBar(gP);
+
         if(keyHandler.goUp || keyHandler.goDown || keyHandler.goRight || keyHandler.goLeft){
             if(keyHandler.goUp){        // to samo co: keyHandler.goUp == true
                 direction = "Up";
@@ -154,7 +154,6 @@ public class Player extends Entity{
                     }
                     walkingTime = 0;
                 }
-            // if (keyHandler.keyReleased(keyHandler.key)) mozna pokombinowac zeby jak sie zatrzymujesz to byl statyczny
         }
         showCoordinates(x,y,gP);
     }

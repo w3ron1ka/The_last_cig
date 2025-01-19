@@ -8,6 +8,7 @@ import java.awt.event.*;
 public class MenuPanel extends JPanel {
 
     GamePanel gP;
+    LevelManager lM;
 
     private int buttonWidth = 225;
     private int buttonHeight = 75;
@@ -70,7 +71,9 @@ public class MenuPanel extends JPanel {
     JButton secondLevel = new JButton(lvl2ScaledIcon);
     JButton thirdLevel = new JButton(lvl3ScaledIcon);
 
-
+    public void setGamePanel(GamePanel gP){
+        this.gP = gP;
+    }
     public MenuPanel(CardLayout cardLayout, JPanel mainPanel) {
         //this.setPreferredSize(new Dimension(gP.screenWidth, gP.screenHeight));
         setPreferredSize(new Dimension(1248, 768));
@@ -80,30 +83,38 @@ public class MenuPanel extends JPanel {
         startGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               cardLayout.show(mainPanel, "Game");
-               mainPanel.getComponent(1).requestFocusInWindow(); // 1 bo indeksujemy od 0, a gamepanel jako 2 dodany w Game
-
+                gP.stopGame();
+                gP.loadLevel(new Level(1, "/maps/map1.txt", 40, 4));
+                cardLayout.show(mainPanel, "Game");
+                mainPanel.getComponent(1).requestFocusInWindow(); // 1 bo indeksujemy od 0, a gamepanel jako 2 dodany w Game
+                gP.resumeGame();
             }
         });
         firstLevel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                gP.stopGame();
+                gP.loadLevel(new Level(1, "/maps/map1.txt", 40, 4));
                 cardLayout.show(mainPanel, "Game");
                 mainPanel.getComponent(1).requestFocusInWindow();
-
+                gP.resumeGame();
             }
         });
         secondLevel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "Game2");
-                mainPanel.getComponent(2).requestFocusInWindow();
-
+                gP.stopGame();
+                gP.loadLevel(new Level(2, "/maps/map2.txt", 30, 8));
+                cardLayout.show(mainPanel, "Game");
+                mainPanel.getComponent(1).requestFocusInWindow();
+                gP.resumeGame();
             }
         });
         thirdLevel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "Game3");
-                mainPanel.getComponent(3).requestFocusInWindow();
-
+                gP.stopGame();
+                gP.loadLevel(new Level(3, "/maps/map3.txt", 20, 12));
+                cardLayout.show(mainPanel, "Game");
+                mainPanel.getComponent(1).requestFocusInWindow();
+                gP.resumeGame();
             }
         });
         exitGame.addActionListener(new ActionListener() {
@@ -205,4 +216,6 @@ public class MenuPanel extends JPanel {
             }
         };
     }
+
+
 }
