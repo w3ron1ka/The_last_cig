@@ -18,6 +18,7 @@ public class MapElementManager {
         this.gP = gP;
         mapElements = new MapElement[9];
         map = new int [gP.dispGridSize][gP.dispGridSize];
+        //map = new int [gP.screenRow][gP.screenColumn];
         getImage();
         getMap("/maps/map1.txt");
     }

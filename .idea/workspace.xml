@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f87d2340-b613-4a84-81fc-ce7b1db1db14" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Displayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Displayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/MapElementManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/MapElementManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/LevelChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/MenuPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +135,7 @@
       <workItem from="1736846200954" duration="41000" />
       <workItem from="1736848361614" duration="1415000" />
       <workItem from="1737128238265" duration="16320000" />
-      <workItem from="1737285015139" duration="7522000" />
+      <workItem from="1737285015139" duration="14318000" />
     </task>
     <servers />
   </component>

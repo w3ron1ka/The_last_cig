@@ -102,8 +102,8 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
                 coins[i] = new Coin(); // trzeba stworzyc obiekty zanim sie je porozklada po planszy
             }
         }
-        coinSetter.setRandom(40);
-
+        //coinSetter.setRandom(40);
+        coinSetter.setRandom(4);
     }
 // wyswietlane
     ImageIcon menuScaledIcon;
@@ -309,42 +309,49 @@ class CoinSetter {
         gP.coins[0].x = 3 * gP.dispGridSize+ gP.dispGridSize/3;
         gP.coins[0].y = 6 * gP.dispGridSize+ gP.dispGridSize/3;
     }
-    public void setRandom(int coinsNum){
+
+//    public void setRandom(int coinsNum){
+//        this.coinsNum = coinsNum;
+//        int coinX, coinY;
+//        Random random = new Random();
+//
+//        for (int i =0; i < coinsNum; i++){
+//            if (gP.coins[i] == null){
+//                gP.coins[i] = new Coin();
+//            }
+//            coinX = random.nextInt(1,24);
+//            coinY = random.nextInt(1,13);
+//            gP.coins[i].x = coinX * gP.dispGridSize+ gP.dispGridSize/3;
+//            gP.coins[i].y = coinY * gP.dispGridSize+ gP.dispGridSize/3;
+//        }
+//    }
+
+    public void setRandom(int coinsNum) {
         this.coinsNum = coinsNum;
-        int coinX, coinY;
         Random random = new Random();
 
-        for (int i =0; i < coinsNum; i++){
-            if (gP.coins[i] == null){
-                gP.coins[i] = new Coin();
+        for (int i = 0; i < coinsNum; i++) {
+            int coinX, coinY;
+            boolean validPosition = false;
+
+            while (!validPosition) {
+                // Losowanie współrzędnych
+                coinX = random.nextInt(1,24);
+                coinY = random.nextInt(1,13);
+
+                int elementIndex = gP.mapEl.map[coinX][coinY];
+
+                // Sprawdzenie, czy pole jest dostępne
+                if (!gP.mapEl.mapElements[elementIndex].collision) {
+                    gP.coins[i] = new Coin();
+                    gP.coins[i].x = coinX * gP.dispGridSize + gP.dispGridSize / 3;
+                    gP.coins[i].y = coinY * gP.dispGridSize + gP.dispGridSize / 3;
+                    validPosition = true;
+
+                    System.out.println("Moneta: X = " + coinX + ", Y = " + coinY + ", Element = " + elementIndex);
+                }
             }
-            coinX = random.nextInt(1,24);
-            coinY = random.nextInt(1,13);
-            gP.coins[i].x = coinX * gP.dispGridSize+ gP.dispGridSize/3;
-            gP.coins[i].y = coinY * gP.dispGridSize+ gP.dispGridSize/3;
         }
     }
 
-//    public void setRandom() {
-//        Random random = new Random();
-//
-//        for (int i = 0; i < gP.coins.length; i++) {
-//            int coinX, coinY;
-//            boolean validPosition = false;
-//
-//            while (!validPosition) {
-//                // Losowanie współrzędnych
-//                coinX = random.nextInt(1,24);
-//                coinY = random.nextInt(1,14);
-//
-//                // Sprawdzenie, czy pole jest dostępne
-//                if (!gP.mapEl.mapElements[coinX]) {       //gP.mapEl.map[coinY][coinX].collision     //gP.mapEl.mapElements[coinX][coinY].collision
-//                    gP.coins[i] = new Coin();
-//                    gP.coins[i].x = coinX * gP.dispGridSize + gP.dispGridSize / 3;
-//                    gP.coins[i].y = coinY * gP.dispGridSize + gP.dispGridSize / 3;
-//                    validPosition = true;
-//                }
-//            }
-//        }
-//    }
 }
