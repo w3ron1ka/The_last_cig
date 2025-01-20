@@ -21,29 +21,58 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         key = e.getKeyCode();   // zwraca int kodu nacisnietego klawisza z klawiatury
-        switch (key) {
-            case KeyEvent.VK_UP:
-                goUp = true;
-                break;
-            case KeyEvent.VK_DOWN:
-                 goDown = true;
-                 break;
-            case KeyEvent.VK_RIGHT:
-                goRight = true;
-                break;
-            case KeyEvent.VK_LEFT:
-                goLeft = true;
-                break;
-            case KeyEvent.VK_P:
-                if (gP.gamePhase == gP.playPhase) {
-                    gP.gamePhase = gP.pausedPhase;
-                }
-                else if (gP.gamePhase == gP.pausedPhase) {
-                    gP.gamePhase = gP.playPhase;
-                }
+        if (gP.gamePhase == gP.playPhase || gP.gamePhase == gP.pausedPhase) {
+            switch (key) {
+                case KeyEvent.VK_UP:
+                    goUp = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    goDown = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    goRight = true;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    goLeft = true;
+                    break;
+                case KeyEvent.VK_P:
+                    if (gP.gamePhase == gP.playPhase) {
+                        gP.gamePhase = gP.pausedPhase;
+                    } else if (gP.gamePhase == gP.pausedPhase) {
+                        gP.gamePhase = gP.playPhase;
+                    }
 
-                break;
+                    break;
+            }
         }
+        if (gP.gamePhase == gP.nextLevelPhase){
+            switch (key) {
+                case KeyEvent.VK_UP:
+                    gP.textDisplayer.selectOption--;
+                    if (gP.textDisplayer.selectOption < 0){
+                        gP.textDisplayer.selectOption = 1;
+                    }
+                    gP.repaint();
+                    break;
+                case KeyEvent.VK_DOWN:
+                    gP.textDisplayer.selectOption++;
+                    if (gP.textDisplayer.selectOption > 1){
+                        gP.textDisplayer.selectOption = 0;
+                    }
+                    gP.repaint();
+                    break;
+                case KeyEvent.VK_ENTER:
+                    if (gP.textDisplayer.selectOption == 0){
+                        gP.gamePhase = gP.playPhase;
+                    }
+                    else if (gP.textDisplayer.selectOption == 1){
+                        gP.gamePhase = gP.menuPhase;
+                    }
+                    break;
+            }
+
+        }
+
     }
 
     @Override

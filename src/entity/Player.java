@@ -77,10 +77,12 @@ public class Player extends Entity{
                     }
                 }
                 if (addicted%30 == 0 && addicted != 0 && !levelUp){
+                    gP.gamePhase = gP.nextLevelPhase;
                     gP.nextLevel();
                     levelUp = true;
                     smokedCigs = 0;
                     addicted = 0;
+                    System.out.println("faza gry:" + gP.gamePhase);
                     //addicted++;
                 }
                 if (addicted % 30 != 0){

@@ -17,6 +17,7 @@ public class Displayer {
     BufferedImage cigPackImage;
     BufferedImage emptyCigPackImage;
     BufferedImage image; // do papierosrw
+    public int selectOption = 0;
 
     public Displayer(GamePanel gP) {
         this.gP = gP;
@@ -88,6 +89,54 @@ public class Displayer {
 
 
     // napisy na ekranie
+    public void drawNextAddictionState(Graphics2D g2d){
+        int x,y;
+        String text;
+        if (gP.gamePhase == gP.nextLevelPhase){
+
+            //przyciemnienie
+            g2d.setColor(new Color(0, 0, 0, 200));
+            g2d.fillRect(0,0,gP.screenWidth, gP.screenHeight);
+
+            x = centerText("You smoked so much...");
+            y = gP.dispGridSize*5;
+
+            text = "You smoked so much";
+            g2d.setColor(Color.BLACK);
+            g2d.drawString(text, x, y);
+            g2d.setColor(Color.MAGENTA);
+            g2d.drawString(text, x-2, y-2);
+            g2d.setColor(Color.WHITE);
+            g2d.drawString(text, x-4, y-4);
+
+            //idziemy do menu
+            text = "I want to smoke more";
+            g2d.setColor(Color.BLACK);
+            g2d.drawString(text, x, y*2);
+            if (selectOption == 0){
+                g2d.setColor(Color.RED);
+                g2d.drawString(">", x-gP.dispGridSize, y*2);
+                g2d.drawString(text, x, y*2-4);
+               // g2d.drawString(text, x, y*2);
+            }
+
+            //exit xd
+            text = "I want to get out of it";
+            g2d.setColor(Color.BLACK);
+            g2d.drawString(text, x, y*2 +gP.dispGridSize+5);
+            if (selectOption == 1){
+                g2d.setColor(Color.RED);
+                g2d.drawString(">", x-gP.dispGridSize, y*2+gP.dispGridSize+5);
+                g2d.drawString(text, x, y*2-4+gP.dispGridSize+5);
+                //g2d.drawString(text, x, y*2);
+            }
+
+            System.out.println("Faza gry: " + gP.gamePhase);
+            //g2d.setColor(new Color(0, 0, 0, 80));
+
+        }
+    }
+
     public void drawPause(Graphics2D g2d){
         this.g2d = g2d;
         g2d.setColor(Color.MAGENTA);
@@ -96,12 +145,14 @@ public class Displayer {
 
         }
         else if (gP.gamePhase == gP.pausedPhase) {
-            drawTextOnScreen("PAUSED");
+            drawTextOnScreen("PAUSED", 120f);
+            g2d.setColor(new Color(0, 0, 0, 80));
+            g2d.fillRect(0,0,gP.screenWidth, gP.screenHeight);
         }
 
     }
-    public void drawTextOnScreen(String text){
-        g2d.setFont(g2d.getFont().deriveFont(Font.BOLD,120f));
+    public void drawTextOnScreen(String text, float textSize){
+        g2d.setFont(g2d.getFont().deriveFont(Font.BOLD,textSize));
         int y = gP.screenHeight/2;
         int x = centerText(text);
 

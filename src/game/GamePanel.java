@@ -166,6 +166,10 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
             Graphics2D g2d = (Graphics2D) this.getGraphics();
             textDisplayer.drawPause(g2d);
         }
+        else if (gamePhase == nextLevelPhase) {
+            Graphics2D g2d = (Graphics2D) this.getGraphics();
+            textDisplayer.drawNextAddictionState(g2d);
+        }
     }
 
     public void paintComponent(Graphics g){
@@ -194,6 +198,7 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         textDisplayer.drawCoin(g2d);
         textDisplayer.drawCigPack(g2d);
         textDisplayer.drawPause(g2d);
+        textDisplayer.drawNextAddictionState(g2d);
 
         g2d.dispose();      // oszczedza pamiec
     }
