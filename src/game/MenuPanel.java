@@ -10,7 +10,7 @@ public class MenuPanel extends JPanel {
     GamePanel gP;
     LevelManager lM;
     Graphics2D g2d;
-    Displayer displayer;
+     Displayer displayer;
 
     private Timer avatarTimer;
 
@@ -84,11 +84,18 @@ public class MenuPanel extends JPanel {
         this.setDoubleBuffered(true);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        // animacja avatara
         avatarTimer = new Timer(200, e -> {
-            if (displayer != null) {
-                displayer.moveAvatar(); // Zmiana sprite'a
+            if (gP.displayer != null) {
+                gP.displayer.moveAvatar();
+                System.out.println("Avatar sprite updated: " + displayer.avatarSprite);
             }
-            repaint(); // Odśwież panel, aby pokazać zmiany
+            else {
+                System.err.println("Displayer is null in MenuPanel!");
+                gP.displayer = new Displayer(gP);
+                gP.displayer.moveAvatar();
+            }
+            repaint();
         });
         avatarTimer.start(); // Uruchom Timer
 
@@ -231,6 +238,7 @@ public class MenuPanel extends JPanel {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        System.out.println("MenuPanel repainted");
         Graphics2D g2d = (Graphics2D) g;
 
         drawAvatarArea(g2d);
@@ -240,9 +248,12 @@ public class MenuPanel extends JPanel {
         g2d.drawRect(gP.dispGridSize,gP.dispGridSize*4+40,gP.dispGridSize*8,gP.dispGridSize*10);
 
         if (displayer == null){
-            displayer = new Displayer(gP);
+            //displayer = new Displayer(gP);
+            displayer = gP.displayer;           // czyli TU JEST NULL I TU TRZEBA COS ZMIENIC BO TO U GORY NIE DZIALA
         }
+        System.out.println("addictionState: " + displayer.addictionState);
         displayer.drawAvatar(g2d);
+
     }
 
 

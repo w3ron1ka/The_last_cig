@@ -1,5 +1,6 @@
 package entity;
 
+import game.Displayer;
 import game.Game;
 import game.GamePanel;
 import game.KeyHandler;
@@ -26,6 +27,7 @@ public class Player extends Entity{
     public int resetCollisionBoundY = 18;
     public int wallet = 0;
     boolean levelUp;
+    Displayer displayer;
 
     public Player(GamePanel gP, KeyHandler kH) {
         this.gP = gP;
@@ -35,6 +37,8 @@ public class Player extends Entity{
 
         setDefaultPosition(48,48,2);
         getImage();
+        //displayer = new Displayer(gP);
+        displayer = gP.displayer;
     }
 
     public void setDefaultPosition(int x, int y, int speed) {
@@ -67,22 +71,25 @@ public class Player extends Entity{
                 if ((Math.abs(deltaX) < 10 && Math.abs(deltaY) < 30) || (Math.abs(deltaY) < 3 && Math.abs(deltaX) < 30)){
                     smokingCounter++;
                     if  (smokingCounter == 10) {      //moze razy FPS
-                        System.out.println("deltaX: " + deltaX);
-                        System.out.println("deltaY: " + deltaY);
+                        //System.out.println("deltaX: " + deltaX);
+                        //System.out.println("deltaY: " + deltaY);
                         smokedCigs++;
-                        System.out.println("Wypalone szlugi: "+smokedCigs);
+                        //System.out.println("Wypalone szlugi: "+smokedCigs);
                         smokingCounter = 0;
                         addicted = smokedCigs/3;
                         //gP.playSoundEffect(1);
                     }
                 }
                 if (addicted%30 == 0 && addicted != 0 && !levelUp){
+                    gP.displayer.addictionState++;
+
                     gP.gamePhase = gP.nextLevelPhase;
                     gP.nextLevel();
                     levelUp = true;
                     smokedCigs = 0;
                     addicted = 0;
                     System.out.println("faza gry:" + gP.gamePhase);
+                    //System.out.println("Addiction state updated to: " + gP.displayer.addictionState);
                     //addicted++;
                 }
                 if (addicted % 30 != 0){

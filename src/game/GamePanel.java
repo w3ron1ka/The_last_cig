@@ -32,11 +32,16 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     // klawiatury i inne takie
     KeyHandler keyHandler = new KeyHandler(this);
     public Displayer textDisplayer = new Displayer(this);
-    public Displayer barDisplayer = new Displayer(this);
+    public MenuPanel mP;
     CoinSetter coinSetter = new CoinSetter(this);
     LevelManager levelManager;
     public int currentLevel = 0;
     public CollisionDetector collisionDetector = new CollisionDetector(this);
+    public Displayer displayer;
+
+    public void setMenuPanel(MenuPanel menuPanel) {
+        this.mP = menuPanel;
+    }
 
     // dzwiek
     Sound melody = new Sound();
@@ -46,10 +51,6 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     Player player = new Player(this, keyHandler);
 
     int cigCount = 1;
-//    Cigarette cigarette = new Cigarette(this);
-//    Cigarette cig2 = new Cigarette(this);
-//    Cigarette cig3 = new Cigarette(this);
-//    Cigarette cig4 = new Cigarette(this);
 
     public Coin coins[] = new Coin[40];
 
@@ -77,6 +78,9 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         this.add(label);
         this.add(labelCig);
         this.add(menu);
+        //this.displayer = displayer;
+        displayer = new Displayer(this);
+
         gamePhase = playPhase;
 
         levelManager = new LevelManager();
@@ -125,6 +129,13 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         long lastTime = System.nanoTime();
         long currentTime;
 
+        if (mP != null) {
+            //mP.repaint();
+            SwingUtilities.invokeLater(() -> mP.repaint());
+        } else {
+            System.err.println("MenuPanel is null in GamePanel!");
+        }
+
         while(thread != null){
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / render;     // metoda delty
@@ -133,6 +144,7 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
             if (delta >= 1 && gamePhase == playPhase) {
                 update();   // odswieza info o pozycji gracza np
                 repaint();  // rysuje od nowa ekran z ta info z update
+
                 delta = 0;
             }
         }

@@ -21,10 +21,18 @@ public class Displayer {
     BufferedImage avatarImage1, avatarImage2, avatarSmokingImage1, avatarSmokingImage2, avatarDegradedImage1, avatarDegradedImage2;
     int avatarSprite = 1;
     int avatarCounter = 0;
+    public int addictionState = 0;
     public int selectOption = 0;
 
     public Displayer(GamePanel gP) {
         this.gP = gP;
+
+        arial_40 = new Font("Arial", Font.BOLD, 40);
+        Coin coin = new Coin();
+        coinImage =coin.image;
+        readAvatarImage();
+    }
+    public Displayer() {
 
         arial_40 = new Font("Arial", Font.BOLD, 40);
         Coin coin = new Coin();
@@ -171,13 +179,39 @@ public class Displayer {
 
     public void drawAvatar(Graphics2D g2d){
         BufferedImage image = avatarImage1;
-        switch(avatarSprite){
-            case 1:
-                image = avatarImage1;
-                break;
-            case 2:
-                image = avatarImage2;
-                break;
+        System.out.println("Drawing avatar with addictionState: " + addictionState);
+        if (addictionState == 0){
+            switch(avatarSprite){
+                case 1:
+                    image = avatarImage1;
+                    break;
+                case 2:
+                    image = avatarImage2;
+                    break;
+            }
+        }
+
+        else if (addictionState == 1){
+            image = avatarSmokingImage1;
+            switch(avatarSprite){
+                case 1:
+                    image = avatarSmokingImage1;
+                    break;
+                case 2:
+                    image = avatarSmokingImage2;
+                    break;
+            }
+        }
+        else if (addictionState >= 2){
+            image = avatarDegradedImage1;
+            switch(avatarSprite){
+                case 1:
+                    image = avatarDegradedImage1;
+                    break;
+                case 2:
+                    image = avatarDegradedImage2;
+                    break;
+            }
         }
         // AvatarArea
         int avatarX = gP.dispGridSize - 100;
@@ -194,16 +228,17 @@ public class Displayer {
                 avatarSprite = 1;
             }
             avatarCounter = 0;
+            //mP.repaint();
         }
     }
     public void readAvatarImage(){
         try {
             avatarImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite1.png"));
             avatarImage2 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite2up.png"));
-//            avatarSmokingImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite1.png"));
-//            avatarSmokingImage2 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite2up.png"));
-//            avatarDegradedImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite1.png"));
-//            avatarDegradedImage2 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite2up.png"));
+            avatarSmokingImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/snoking1.png"));
+            avatarSmokingImage2 = ImageIO.read(getClass().getResourceAsStream("/avatar/smoking2.png"));
+            avatarDegradedImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/degraded1.png"));
+            avatarDegradedImage2 = ImageIO.read(getClass().getResourceAsStream("/avatar/degraded2.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

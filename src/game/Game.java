@@ -3,6 +3,7 @@ package game;
 import entity.Cigarette;
 import entity.Player;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,9 +27,13 @@ public class Game {
         JPanel mainPanel = new JPanel(cardLayout);
         mainPanel.setPreferredSize(new Dimension(1248, 768));
 
-        MenuPanel menuPanel = new MenuPanel(cardLayout, mainPanel );
+        //Displayer avatarDisplayer = new Displayer();
+
+        MenuPanel menuPanel = new MenuPanel(cardLayout, mainPanel);
         GamePanel gPanel = new GamePanel(cardLayout, mainPanel);
+
         menuPanel.setGamePanel(gPanel);
+        gPanel.setMenuPanel(menuPanel);
 
         gPanel.gameSettings();
         gPanel.startThread();
@@ -36,6 +41,7 @@ public class Game {
         mainPanel.add(menuPanel, "Menu");
         mainPanel.add(gPanel, "Game");
         cardLayout.show(mainPanel, "Menu");
+        //menuPanel.repaint();
         window.add(mainPanel);
         window.pack();      // okno bedzie dostosowywac sie do rzomiaru panelu
         window.setVisible(true);
