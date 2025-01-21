@@ -6,9 +6,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Displayer {
     GamePanel gP;
+    MenuPanel mP;
     Graphics2D g2d;
     Font arial_40;
     public JPanel addictionPanel;
@@ -16,7 +18,9 @@ public class Displayer {
     BufferedImage coinImage;
     BufferedImage cigPackImage;
     BufferedImage emptyCigPackImage;
-    BufferedImage image; // do papierosrw
+    BufferedImage avatarImage1, avatarImage2, avatarSmokingImage1, avatarSmokingImage2, avatarDegradedImage1, avatarDegradedImage2;
+    int avatarSprite = 1;
+    int avatarCounter = 0;
     public int selectOption = 0;
 
     public Displayer(GamePanel gP) {
@@ -25,6 +29,7 @@ public class Displayer {
         arial_40 = new Font("Arial", Font.BOLD, 40);
         Coin coin = new Coin();
         coinImage =coin.image;
+        readAvatarImage();
     }
 
     // ikonka monet
@@ -163,4 +168,48 @@ public class Displayer {
         int x = gP.screenWidth/2 - length/2;
         return x;
     }
+
+    public void drawAvatar(Graphics2D g2d){
+        BufferedImage image = avatarImage1;
+        switch(avatarSprite){
+            case 1:
+                image = avatarImage1;
+                break;
+            case 2:
+                image = avatarImage2;
+                break;
+        }
+        // AvatarArea
+        int avatarX = gP.dispGridSize - 100;
+        int avatarY = gP.dispGridSize * 4+ 40;
+        g2d.drawImage(image, avatarX, avatarY, gP.dispGridSize*10, gP.dispGridSize*10, null);
+    }
+    public void moveAvatar(){
+        avatarCounter++;
+
+        if (avatarCounter == 3) {
+            if (avatarSprite == 1) {
+                avatarSprite = 2;
+            } else {
+                avatarSprite = 1;
+            }
+            avatarCounter = 0;
+        }
+    }
+    public void readAvatarImage(){
+        try {
+            avatarImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite1.png"));
+            avatarImage2 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite2up.png"));
+//            avatarSmokingImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite1.png"));
+//            avatarSmokingImage2 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite2up.png"));
+//            avatarDegradedImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite1.png"));
+//            avatarDegradedImage2 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite2up.png"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
+
+

@@ -9,6 +9,10 @@ public class MenuPanel extends JPanel {
 
     GamePanel gP;
     LevelManager lM;
+    Graphics2D g2d;
+    Displayer displayer;
+
+    private Timer avatarTimer;
 
     private int buttonWidth = 225;
     private int buttonHeight = 75;
@@ -79,6 +83,14 @@ public class MenuPanel extends JPanel {
         setPreferredSize(new Dimension(1248, 768));
         this.setDoubleBuffered(true);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        avatarTimer = new Timer(200, e -> {
+            if (displayer != null) {
+                displayer.moveAvatar(); // Zmiana sprite'a
+            }
+            repaint(); // Odśwież panel, aby pokazać zmiany
+        });
+        avatarTimer.start(); // Uruchom Timer
 
         startGame.addActionListener(new ActionListener() {
             @Override
@@ -215,6 +227,22 @@ public class MenuPanel extends JPanel {
 
             }
         };
+    }
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+
+        drawAvatarArea(g2d);
+    }
+    public void drawAvatarArea(Graphics2D g2d){
+        g2d.setColor(Color.BLACK);
+        g2d.drawRect(gP.dispGridSize,gP.dispGridSize*4+40,gP.dispGridSize*8,gP.dispGridSize*10);
+
+        if (displayer == null){
+            displayer = new Displayer(gP);
+        }
+        displayer.drawAvatar(g2d);
     }
 
 

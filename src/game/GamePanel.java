@@ -87,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "Menu");
                 mainPanel.getComponent(0).requestFocusInWindow();
-
+                //gamePhase = menuPhase;
             }
         });
         this.setVisible(true);
