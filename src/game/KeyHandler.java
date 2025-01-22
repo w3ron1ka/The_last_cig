@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import game.GamePanel.*;
@@ -66,7 +67,7 @@ public class KeyHandler implements KeyListener {
                         gP.gamePhase = gP.playPhase;
                     }
                     else if (gP.textDisplayer.selectOption == 1){
-                        gP.gamePhase = gP.menuPhase;
+                        gP.menu.doClick();
                     }
                     break;
             }

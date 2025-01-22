@@ -76,7 +76,7 @@ public class Player extends Entity{
                         smokedCigs++;
                         //System.out.println("Wypalone szlugi: "+smokedCigs);
                         smokingCounter = 0;
-                        addicted = smokedCigs/3;
+                        addicted = smokedCigs;      /// /3
                         //gP.playSoundEffect(1);
                     }
                 }

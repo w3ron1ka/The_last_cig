@@ -1,8 +1,14 @@
 package game;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+
 
 
 public class MenuPanel extends JPanel {
@@ -16,6 +22,11 @@ public class MenuPanel extends JPanel {
 
     private int buttonWidth = 225;
     private int buttonHeight = 75;
+    private BufferedImage backgroundImage, cigAvatar1, cigAvatar2;
+    private int currentCig = 1;
+    private int cigX = 800;
+    private int cigY = 420;
+
 
     // IKONKI GUZIKOW
     //start
@@ -83,12 +94,15 @@ public class MenuPanel extends JPanel {
         setPreferredSize(new Dimension(1248, 768));
         this.setDoubleBuffered(true);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        getImage();
 
         // animacja avatara
         avatarTimer = new Timer(200, e -> {
             if (gP.displayer != null) {
                 gP.displayer.moveAvatar();
                 System.out.println("Avatar sprite updated: " + displayer.avatarSprite);
+                currentCig =(currentCig == 1) ? 2 : 1;
+                repaint();
             }
             else {
                 System.err.println("Displayer is null in MenuPanel!");
@@ -235,17 +249,34 @@ public class MenuPanel extends JPanel {
             }
         };
     }
+    public void getImage(){
+        try {
+            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/background/tlo.png"));
+            cigAvatar1 = ImageIO.read(getClass().getResourceAsStream("/cigarette/cig_front1.png"));
+            cigAvatar2 = ImageIO.read(getClass().getResourceAsStream("/cigarette/cig_front2.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         System.out.println("MenuPanel repainted");
         Graphics2D g2d = (Graphics2D) g;
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+        }
+        // Rysowanie animowanego papierosa
+        BufferedImage currentImage = (currentCig == 1) ? cigAvatar1 : cigAvatar2;
+        if (currentImage != null) {
+            g.drawImage(currentImage, cigX, cigY, null);
+        }
 
         drawAvatarArea(g2d);
     }
     public void drawAvatarArea(Graphics2D g2d){
-        g2d.setColor(Color.BLACK);
-        g2d.drawRect(gP.dispGridSize,gP.dispGridSize*4+40,gP.dispGridSize*8,gP.dispGridSize*10);
+        //g2d.setColor(Color.BLACK);
+        //g2d.drawRect(gP.dispGridSize,gP.dispGridSize*4+40,gP.dispGridSize*8,gP.dispGridSize*10);
 
         if (displayer == null){
             //displayer = new Displayer(gP);

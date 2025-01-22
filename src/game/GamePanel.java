@@ -188,18 +188,12 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;    // ma wiecej funkcji 2d
         mapEl.draw(g2d);    // mapa pod graczem
-       // coins[0].draw(g2d,this);
         for (Coin coin : coins) {
             if (coin != null) {
                 coin.draw(g2d, this);
             }
         }
         player.draw(g2d);
-
-//        cigarette.draw(g2d);
-//        cig2.draw(g2d);
-//        cig3.draw(g2d);
-//        cig4.draw(g2d);
 
         for (Cigarette cig : cigarettes) {
             if (cig != null) {

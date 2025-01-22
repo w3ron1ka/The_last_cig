@@ -111,10 +111,10 @@ public class Displayer {
             g2d.setColor(new Color(0, 0, 0, 200));
             g2d.fillRect(0,0,gP.screenWidth, gP.screenHeight);
 
-            x = centerText("You smoked so much...");
+            x = centerText("You smoked ... much");
             y = gP.dispGridSize*5;
 
-            text = "You smoked so much";
+            text = "You smoked ... much";
             g2d.setColor(Color.BLACK);
             g2d.drawString(text, x, y);
             g2d.setColor(Color.MAGENTA);
