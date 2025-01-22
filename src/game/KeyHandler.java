@@ -5,12 +5,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import game.GamePanel.*;
 
+/**
+ * Klasa obsługująca klawiaturę
+ */
 public class KeyHandler implements KeyListener {
 
     public boolean goUp, goDown, goLeft, goRight;
     public int key;
     GamePanel gP;
 
+    /**
+     * Konstruktor KeyHandler
+     * @param gP
+     */
     public KeyHandler(GamePanel gP) {
         this.gP = gP;
     }
@@ -19,6 +26,10 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * Metoda obsługująca naciśnięcie odpowiednich klawiszy
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         key = e.getKeyCode();   // zwraca int kodu nacisnietego klawisza z klawiatury
@@ -76,6 +87,10 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    /**
+     * Metoda obsługująca odciśnięcie odpowiednich klawiszy
+     * @param e the event to be processed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         //gP.player.isWalking = false;

@@ -11,11 +11,18 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Klasa rozszerzająca Entity, odpowiada za tworzenie obiektów, przed którymi ma uciekać gracz - papierosów
+ */
 public class Cigarette extends Entity {
     GamePanel gP;
     Player player;
     protected int randomNum = 0;
 
+    /**
+     * Konstruktor Cigarette ustawiający pozycję domyślną, ikonki i granice kolizji
+     * @param gP
+     */
     public Cigarette(GamePanel gP) {
         super(gP);
         this.gP = gP;
@@ -25,10 +32,17 @@ public class Cigarette extends Entity {
         getImage();
     }
 
+    /**
+     * Metoda ustawiająca gracza, hermetyzuje kod
+     * @param player    obiekt klasy Player
+     */
     public void setPlayer(Player player) {  // bo player null inaczej
         this.player = player;
     }
 
+    /**
+     * Metoda ustawiająca sposób zachowania papierosów
+     */
     public void behave() {
         Random random = new Random();
         walkingCounter++;
@@ -38,12 +52,10 @@ public class Cigarette extends Entity {
                if (collided){
                    randomNum = random.nextInt(4);
                    walkingCounter = 0;
-
                }
                else {
                     followPlayer(player);
                }
-
             }
             else {
                 randomNum = random.nextInt(4);
@@ -67,6 +79,10 @@ public class Cigarette extends Entity {
         //showCoordinates(x,y,gP);
     }
 
+    /**
+     * Metoda implementująca sposób śledzenia gracza
+     * @param player    obiekt klasy Player, który jest śledzony
+     */
     public void followPlayer(Player player) {
         this.player = player;
 
@@ -123,6 +139,12 @@ public class Cigarette extends Entity {
         }
     }
 
+    /**
+     * Metoda ustawiająca pozycję domyślną papierosów
+     * @param x     współrzędna x na ekranie
+     * @param y     współrzędna y na ekranie
+     * @param speed     szybkość poruszania się papierosa
+     */
     public void setDefaultPosition(int x, int y, int speed) {
         this.x = x;
         this.y = y;
@@ -139,6 +161,10 @@ public class Cigarette extends Entity {
         this.gP = gP;
         gP.labelCig.setText("Cig coordinates X: " + x + " Y: " + y);
     }
+
+    /**
+     * Metoda pobierająca ikonki dla poszczególnych stanów papierosa (w górę, prawo, lewo, zmiana nogi)
+     */
     public void getImage(){
         try {
             imageUp1 = ImageIO.read(getClass().getResourceAsStream("/cigarette/cig_back1.png"));
@@ -154,6 +180,11 @@ public class Cigarette extends Entity {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metoda rysująca papierosy
+     * @param g2d   Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki papierosa
+     */
     public void draw(Graphics2D g2d) {
         BufferedImage image = imageDown1;
         switch(direction){

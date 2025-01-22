@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Klasa opisująca wspólne cechy wszystkich bytów
+ */
 public class Entity {
     public int x, y;
     public int speed;
@@ -21,13 +24,25 @@ public class Entity {
     public int walkingCounter = 0;
 
     GamePanel gP;
+
+    /**
+     * Konstruktor bytu z przesłanym GamePanel
+     * @param gP
+     */
     public Entity(GamePanel gP) {
         this.gP = gP;
     }
+
+    /**
+     * Konstruktor bytu pusty
+     */
     public Entity(){
 
     }
 
+    /**
+     * Metoda aktualizująca pozycję, zachowanie, kolizje i wszelkie ruchy bytów
+     */
     public void update(){
         behave();
         collided = false;
@@ -63,5 +78,8 @@ public class Entity {
                 walkingTime = 0;
             }
     }
+    /**
+     * Metoda ustawiająca sposób zachowania bytów
+     */
     public void behave(){}
 }

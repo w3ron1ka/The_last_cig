@@ -7,8 +7,15 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Klasa główna
+ */
 public class Game {
 
+    /**
+     * Punkt startowy programu z przygotowaniem okna i paneli
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println("Hello World!");
 

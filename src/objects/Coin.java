@@ -6,6 +6,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Klasa zarządzająca monetami na ekranie
+ */
 public class Coin {
     public BufferedImage image;
     public int x,y;
@@ -14,6 +17,9 @@ public class Coin {
     public int resetCollisionBoundX = 0;
     public int resetCollisionBoundY = 0;
 
+    /**
+     * Konstruktor ładujący ikonkę monety
+     */
     public Coin() {
         try {
             image = ImageIO.read(getClass().getResourceAsStream("/objects/coin.png"));
@@ -23,6 +29,11 @@ public class Coin {
         }
     }
 
+    /**
+     * Metoda rysująca monetę
+     * @param g2d   Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki
+     * @param gP    Obiekt klasy GamePanel, na którym wyświetlane są monety
+     */
     public void draw(Graphics2D g2d, GamePanel gP) {
         g2d.drawImage(image,x,y, gP.dispGridSize/3, gP.dispGridSize/3, null);
         g2d.setColor(Color.RED);

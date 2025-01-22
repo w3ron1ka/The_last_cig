@@ -5,14 +5,25 @@ import entity.Player;
 
 import java.awt.*;
 
+/**
+ * Klasa odpowiadająca za kolizje bytów z elementami mapy lub monetami
+ */
 public class CollisionDetector {
 
     GamePanel gamePanel;
+
+    /**
+     * Konstruktor CollisionDetector
+     * @param gamePanel
+     */
     public CollisionDetector(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
-
+    /**
+     * Metoda sprawdzająca kolizje bytów z elementami mapy
+     * @param entity    Byt którego kolizja jest sprawdzana
+     */
     public void checkCollision(Entity entity) {
 
         int entityLeftX = entity.x + entity.collisionBounds.x;
@@ -68,6 +79,11 @@ public class CollisionDetector {
 //
 //    }
 
+    /**
+     * Metoda sprawdzająca kolizję gracza z monetami
+     * @param player    gracz zbierający monety
+     * @return  zwracany jest index (która z kolei) moneta została zebrana
+     */
     public int checkCoin(Player player){
 
         int index = 666;

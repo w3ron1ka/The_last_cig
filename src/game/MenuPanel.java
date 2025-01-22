@@ -9,8 +9,9 @@ import java.io.File;
 import java.io.IOException;
 
 
-
-
+/**
+ * Klasa panelu menu
+ */
 public class MenuPanel extends JPanel {
 
     GamePanel gP;
@@ -86,9 +87,19 @@ public class MenuPanel extends JPanel {
     JButton secondLevel = new JButton(lvl2ScaledIcon);
     JButton thirdLevel = new JButton(lvl3ScaledIcon);
 
+    /**
+     * Metoda ustawiająca panel gry
+     * @param gP
+     */
     public void setGamePanel(GamePanel gP){
         this.gP = gP;
     }
+
+    /**
+     * Konstruktor panelu menu
+     * @param cardLayout    sposób wyświetlania panelu menu
+     * @param mainPanel     główny panel, na którym umieszczony jest panel gry i menu
+     */
     public MenuPanel(CardLayout cardLayout, JPanel mainPanel) {
         //this.setPreferredSize(new Dimension(gP.screenWidth, gP.screenHeight));
         setPreferredSize(new Dimension(1248, 768));
@@ -249,6 +260,10 @@ public class MenuPanel extends JPanel {
             }
         };
     }
+
+    /**
+     * Metoda pobierająca ikonki avatara i tło
+     */
     public void getImage(){
         try {
             backgroundImage = ImageIO.read(getClass().getResourceAsStream("/background/tlo.png"));
@@ -259,6 +274,10 @@ public class MenuPanel extends JPanel {
         }
     }
 
+    /**
+     * Metoda rysująca komponenty na panelu menu
+     * @param g the <code>Graphics</code> object to protect
+     */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         System.out.println("MenuPanel repainted");
@@ -278,6 +297,11 @@ public class MenuPanel extends JPanel {
 //        }
         drawAvatarArea(g2d);
     }
+
+    /**
+     * Metoda rysująca obszar z avatarem
+     * @param g2d Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki
+     */
     public void drawAvatarArea(Graphics2D g2d){
         //g2d.setColor(Color.BLACK);
         //g2d.drawRect(gP.dispGridSize,gP.dispGridSize*4+40,gP.dispGridSize*8,gP.dispGridSize*10);
@@ -290,8 +314,8 @@ public class MenuPanel extends JPanel {
         displayer.drawAvatar(g2d);
 
     }
-    public void setDisplayer(Displayer displayer) {
-        this.displayer = displayer;
-    }
+//    public void setDisplayer(Displayer displayer) {
+//        this.displayer = displayer;
+//    }
 
 }

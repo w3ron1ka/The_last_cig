@@ -9,19 +9,31 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Klasa zarządzająca i rysująca mapy na podstawie klasy MapElement
+ */
+
 public class MapElementManager {
     GamePanel gP;
     public MapElement[] mapElements;
     public int [][] map;
 
+    /**
+     * Konstruktor pobierający ikonki dla elementów mapy i ich tablicę
+     * @param gP
+     */
     public MapElementManager(GamePanel gP) {
         this.gP = gP;
         mapElements = new MapElement[9];
         map = new int [gP.dispGridSize][gP.dispGridSize];
-        //map = new int [gP.screenRow][gP.screenColumn];
         getImage();
         getMap("/maps/map1.txt");
     }
+
+    /**
+     * Metoda pobierająca ikonki dla poszczególnych elementów mapy
+     */
+
     public void getImage(){
         try {
             mapElements[0] = new MapElement();
@@ -36,9 +48,11 @@ public class MapElementManager {
             e.printStackTrace();
         }
     }
-//    public int[][] getCollision (String mapPath){
-//
-//    }
+
+    /**
+     * Metoda pobierająca mapę ze ścieżki pliku tekstowego
+     * @param mapPath   ścieżka pliku przechowującego w formie tekstowej elementy mapy
+     */
     public void getMap(String mapPath) {
         try {
             InputStream iStream = getClass().getResourceAsStream(mapPath);
@@ -65,8 +79,11 @@ public class MapElementManager {
         }
     }
 
+    /**
+     * Metoda rysująca mapę na ekranie
+     * @param g2d obiekt klasy Graphics2D pozwalający na tworzenie grafiki mapy w wybrany sposób, rozdzielczości
+     */
     public void draw(Graphics2D g2d){
-
         int col = 0, row = 0, x = 0, y = 0;
 
         while (col < gP.screenColumn && row < gP.screenRow) {

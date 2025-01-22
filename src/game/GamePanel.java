@@ -16,6 +16,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Klasa panelu gry, z pętlą gry
+ */
 public class GamePanel extends JPanel implements Runnable { //runnable jest do thread
 
     // wyswietlanie panelu, wielkosc kratek
@@ -39,6 +42,10 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     public CollisionDetector collisionDetector = new CollisionDetector(this);
     public Displayer displayer;
 
+    /**
+     * Metoda ustawiająca panel menu
+     * @param menuPanel
+     */
     public void setMenuPanel(MenuPanel menuPanel) {
         this.mP = menuPanel;
     }
@@ -69,12 +76,19 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     public final int nextLevelPhase = 3;
     public final int menuPhase = 4;
 
-    public void updateDisplayerState() {
-        mP.displayer = this.displayer;
-        mP.repaint();
-    }
+
+//    public void updateDisplayerState() {
+//        mP.displayer = this.displayer;
+//        mP.repaint();
+//    }
 
     //konstruktor
+
+    /**
+     * Konstruktor ustawiający layout, faze gry, ładujący metody obsługujący przycisk
+     * @param cardLayout
+     * @param mainPanel
+     */
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setLayout(new FlowLayout(FlowLayout.CENTER, screenColumn, screenRow));
@@ -105,6 +119,9 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         this.setVisible(true);
     }
 
+    /**
+     * Metoda wczytująca wstępne ustawienia gry
+     */
     public void gameSettings(){
         playMelody(0);
         setButton("resources/buttons/menu.png", "resources/buttons/menuClick.png");
@@ -125,11 +142,18 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
 
     // watek gry
     Thread thread;
+
+    /**
+     * Metoda rozpoczynająca wątek gry
+     */
     public void startThread(){
         thread = new Thread(this);
         thread.start();
     }
     @Override // bo z interfejsu Runnable
+    /**
+     * Metoda z interfejsu Runnable z pętlą gry
+     */
     public void run() {     //tu bedzie game loop
         double render = 1000000000 / FPS;       // co 0,017s sie odswieza i rysuje
        // double nextRender = System.nanoTime() + render;
@@ -158,6 +182,9 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         }
     }
 
+    /**
+     * Metoda aktualizująca stan panelu - byty, monety, napisy
+     */
     public void update(){
         if (gamePhase == playPhase) {
             createCigarettes(1);
@@ -192,6 +219,10 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         }
     }
 
+    /**
+     * Metoda rysująca komponenty na panelu - byty, monety, napisy
+     * @param g the <code>Graphics</code> object to protect
+     */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;    // ma wiecej funkcji 2d
@@ -217,6 +248,10 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         g2d.dispose();      // oszczedza pamiec
     }
 
+    /**
+     * Metoda tworząca listę papierosów
+     * @param cigCount  liczba papierosów na liście
+     */
     public void createCigarettes(int cigCount){
         this.cigCount = cigCount;
 
@@ -230,20 +265,35 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         }
     }
 
+    /**
+     * Metoda włączająca muzykę w tle
+     * @param i     wybrany numer dźwięku na liście
+     */
     public void playMelody(int i){
         melody.setFile(0);
         melody.play();
         melody.loop();
         melody.stop();
     }
+    /**
+     * Metoda włączająca efekt dźwiękowy w tle
+     * @param i     wybrany numer dźwięku na liście
+     */
     public void playSoundEffect(int i){
         soundEffect.setFile(i);
         soundEffect.play();
     }
+    /**
+     * Metoda stopująca muzykę w tle
+     */
     public void pauseMelody(){
         melody.stop();
     }
 
+    /**
+     * Metoda ładująca poziom
+     * @param level ładowany poziom
+     */
     public void loadLevel(Level level) {
         // bo wyrzucalo ConcurrentModificationException bez tego, ochrona przed wieloma watkami, blokada?
         synchronized (cigarettes){      // zeby po powrocie z 3lvl nie bylo juz 12 cig a mniej
@@ -262,6 +312,10 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         }
         coinSetter.setRandom(level.getCoinsCount());
     }
+
+    /**
+     * Metoda ładująca kolejny poziom
+     */
     public void nextLevel(){
         Graphics2D g2d = (Graphics2D) this.getGraphics();
         synchronized (cigarettes){
@@ -276,12 +330,18 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
 
     }
 
+    /**
+     * Metoda stopująca wątek gry
+     */
     public void stopGame() {
         if (thread != null && thread.isAlive()) {
             thread.interrupt();                     // zatrzymuje watek
         }
     }
 
+    /**
+     * Metoda wznawiająca wątek gry
+     */
     public void resumeGame() {
         if (thread == null || !thread.isAlive()) {
             thread = new Thread(this);         // robi nowy watek(ten)
@@ -289,6 +349,11 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         }
     }
 
+    /**
+     * Metoda ustawiająca guzik menu
+     * @param buttonPath    Ścieżka do ikonki guzika niewciśniętego
+     * @param buttonHoverPath   Ścieżka do ikonki guzika hover
+     */
     public void setButton(String buttonPath, String buttonHoverPath){
         // guziki
         //menu
@@ -317,34 +382,33 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     }
 }
 
+/**
+ * Klasa ustawiająca monety na panelu gry
+ */
 class CoinSetter {
     GamePanel gP;
     int coinsNum = 10;
+
+    /**
+     * Konstruktor CoinSetter
+     * @param gP
+     */
     public CoinSetter(GamePanel gP) {
         this.gP = gP;
     }
+
+    /**
+     * Metoda ustawiająca monetę na konkretną pozycję
+     */
     public void setCoin(){
         gP.coins[0] = new Coin();
         gP.coins[0].x = 3 * gP.dispGridSize+ gP.dispGridSize/3;
         gP.coins[0].y = 6 * gP.dispGridSize+ gP.dispGridSize/3;
     }
 
-//    public void setRandom(int coinsNum){
-//        this.coinsNum = coinsNum;
-//        int coinX, coinY;
-//        Random random = new Random();
-//
-//        for (int i =0; i < coinsNum; i++){
-//            if (gP.coins[i] == null){
-//                gP.coins[i] = new Coin();
-//            }
-//            coinX = random.nextInt(1,24);
-//            coinY = random.nextInt(1,13);
-//            gP.coins[i].x = coinX * gP.dispGridSize+ gP.dispGridSize/3;
-//            gP.coins[i].y = coinY * gP.dispGridSize+ gP.dispGridSize/3;
-//        }
-//    }
-
+    /**
+     * Metoda ustawiająca monety randomowo na planszy omijając miejsca niedostępne dla gracza
+     */
     public void setRandom(int coinsNum) {
         this.coinsNum = coinsNum;
         Random random = new Random();

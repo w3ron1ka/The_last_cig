@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Klasa wyświetlająca na panelach grafiki, teksty
+ */
 public class Displayer {
     GamePanel gP;
     MenuPanel mP;
@@ -24,6 +27,10 @@ public class Displayer {
     public int addictionState = 0;
     public int selectOption = 0;
 
+    /**
+     * Konstruktor Displayer wczytujący ikonki avatara, monet
+     * @param gP
+     */
     public Displayer(GamePanel gP) {
         this.gP = gP;
 
@@ -32,16 +39,20 @@ public class Displayer {
         coinImage =coin.image;
         readAvatarImage();
     }
-    public Displayer() {
-
-        arial_40 = new Font("Arial", Font.BOLD, 40);
-        Coin coin = new Coin();
-        coinImage =coin.image;
-        readAvatarImage();
-    }
+//    public Displayer() {
+//
+//        arial_40 = new Font("Arial", Font.BOLD, 40);
+//        Coin coin = new Coin();
+//        coinImage =coin.image;
+//        readAvatarImage();
+//    }
 
     // ikonka monet
 
+    /**
+     * Metoda rysująca monety na panelu gry
+     * @param g2d   Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki
+     */
     public void drawCoin(Graphics2D g2d){
 
         g2d.setFont(arial_40);
@@ -51,6 +62,9 @@ public class Displayer {
     }
     // ikonka paczki papierosow
 
+    /**
+     * Metoda pobierająca ikonki paczek papierosów
+     */
     public void getCigPackImage(){
         BufferedImage imageFull;
         BufferedImage imageEmpty;
@@ -64,6 +78,11 @@ public class Displayer {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metoda rysująca ikonki paczek papierosów
+     * @param g2d   Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki
+     */
     public void drawCigPack(Graphics2D g2d) {
         getCigPackImage();
 
@@ -86,6 +105,11 @@ public class Displayer {
         }
 
     }
+
+    /**
+     * Metoda resetująca (na puste sloty) ikonki paczek papierosów
+     * @param g2d   Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki
+     */
     public void resetCigPack(Graphics2D g2d){
         getCigPackImage();
         int totalSlots = 10; // od 9 do 18 kratki
@@ -102,6 +126,11 @@ public class Displayer {
 
 
     // napisy na ekranie
+
+    /**
+     * Metoda rysująca ekran przed kolejnym poziomem z wyborem opcji
+     * @param g2d   Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki
+     */
     public void drawNextAddictionState(Graphics2D g2d){
         int x,y;
         String text;
@@ -150,6 +179,10 @@ public class Displayer {
         }
     }
 
+    /**
+     * Metoda rysująca pauze w grze
+     * @param g2d   Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki
+     */
     public void drawPause(Graphics2D g2d){
         this.g2d = g2d;
         g2d.setColor(Color.MAGENTA);
@@ -164,6 +197,12 @@ public class Displayer {
         }
 
     }
+
+    /**
+     * Metoda rysująca tekst na ekranie
+     * @param text  Napis, który chcemy wyświetlić na ekranie
+     * @param textSize  Rozmiar wypisywanego tekstu
+     */
     public void drawTextOnScreen(String text, float textSize){
         g2d.setFont(g2d.getFont().deriveFont(Font.BOLD,textSize));
         int y = gP.screenHeight/2;
@@ -171,12 +210,22 @@ public class Displayer {
 
         g2d.drawString(text, x, y);
     }
+
+    /**
+     * Metoda centrująca tekst na ekranie
+     * @param text  Napis który chcemy wycentrować
+     * @return  współrzędna x na ekranie
+     */
     public int centerText(String text){
         int length = (int)g2d.getFontMetrics().getStringBounds(text, g2d).getWidth();
         int x = gP.screenWidth/2 - length/2;
         return x;
     }
 
+    /**
+     * Metoda rysująca avatar
+     * @param g2d   Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki
+     */
     public void drawAvatar(Graphics2D g2d){
         BufferedImage image = avatarImage1;
         System.out.println("Drawing avatar with addictionState: " + addictionState);
@@ -218,6 +267,10 @@ public class Displayer {
         int avatarY = gP.dispGridSize * 4+ 40;
         g2d.drawImage(image, avatarX, avatarY, gP.dispGridSize*10, gP.dispGridSize*10, null);
     }
+
+    /**
+     * Metoda zmieniająca sprite avatara
+     */
     public void moveAvatar(){
         avatarCounter++;
 
@@ -231,6 +284,10 @@ public class Displayer {
             //mP.repaint();
         }
     }
+
+    /**
+     * Metoda wczytująca ikonki avatara
+     */
     public void readAvatarImage(){
         try {
             avatarImage1 = ImageIO.read(getClass().getResourceAsStream("/avatar/sprite1.png"));

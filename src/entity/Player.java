@@ -15,6 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Klasa dziedzicząca po klasie Entity opisująca dodatkowo możliwe zachowania gracza
+ */
 public class Player extends Entity{
     KeyHandler keyHandler;
     GamePanel gP;
@@ -29,6 +32,11 @@ public class Player extends Entity{
     boolean levelUp;
     Displayer displayer;
 
+    /**
+     * Konstruktor włączający obsługę klawiszy dla poruszania się gracza i jego granice kolizji
+     * @param gP
+     * @param kH
+     */
     public Player(GamePanel gP, KeyHandler kH) {
         this.gP = gP;
         this.keyHandler = kH;
@@ -41,16 +49,23 @@ public class Player extends Entity{
         displayer = gP.displayer;
     }
 
+    /**
+     * Metoda ustawiająca domyślną pozycję gracza
+     * @param x     współrzędna x na ekranie
+     * @param y     współrzędna y na ekranie
+     * @param speed     szybkość poruszania się gracza
+     */
     public void setDefaultPosition(int x, int y, int speed) {
         this.x = x;
         this.y = y;
         this.speed = speed;
-//        x = 48;
-//        y = 48;
-//        speed = 2;
         direction = "Down";
     }
 
+    /**
+     * Metoda usuwająca monetę z ekranu, gdy kolizja z graczem i doliczająca ją do jego portfela
+     * @param coinIndex wskazuje na index monety która została zebrana
+     */
     public void pickUpCoin(int coinIndex){
         if (coinIndex != 666){
             wallet++;
@@ -59,6 +74,10 @@ public class Player extends Entity{
         }
     }
 
+    /**
+     * Metoda decydująca o przejściu w kolejne stadia uzależnienia gracza, sprawdza czy gracz i papieros są wystarczająco blisko
+     * @param cigarettes    przesłana lista papierosów, po której iteruje metoda
+     */
     public void smoke(ArrayList<Cigarette> cigarettes){
         synchronized (cigarettes){
             // zwykla petla zamiast foreach nie powoduje wyjatku ConcurrentModificationException
@@ -100,6 +119,9 @@ public class Player extends Entity{
         }
     }
 
+    /**
+     * Metoda pobierająca ikonki dla poszczególnych stanów gracza (w górę, prawo, lewo, zmiana nogi)
+     */
     public void getImage(){
         try {
             imageUp1 = ImageIO.read(getClass().getResourceAsStream("/player/imageUp1.png"));
@@ -115,6 +137,9 @@ public class Player extends Entity{
 
     }
 
+    /**
+     * Metoda aktualizująca położenie gracza
+     */
     public void update(){
         smoke(gP.cigarettes);
 
@@ -168,12 +193,17 @@ public class Player extends Entity{
         //showCoordinates(x,y,gP);
     }
 
-    public void showCoordinates(int x, int y, GamePanel gP) {
-        x= this.x;
-        y= this.y;
-        this.gP = gP;
-        gP.label.setText("Player coordinates X: " + x + " Y: " + y);
-    }
+//    public void showCoordinates(int x, int y, GamePanel gP) {
+//        x= this.x;
+//        y= this.y;
+//        this.gP = gP;
+//        gP.label.setText("Player coordinates X: " + x + " Y: " + y);
+//    }
+
+    /**
+     * Metoda rysująca gracza ze zmiennymi iknonkami na każdą stronę
+     * @param g2d       Obiekt klasy Graphics2D umożliwiający dostosowanie grafiki gracza
+     */
     public void draw(Graphics2D g2d) {
         BufferedImage image = imageDown1;
         switch(direction){
