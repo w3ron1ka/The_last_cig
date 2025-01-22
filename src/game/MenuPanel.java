@@ -271,7 +271,11 @@ public class MenuPanel extends JPanel {
         if (currentImage != null) {
             g.drawImage(currentImage, cigX, cigY, null);
         }
-
+//        if (displayer != null) {
+//            displayer.drawAvatar(g2d);
+//        } else {
+//            System.err.println("Displayer is null!");
+//        }
         drawAvatarArea(g2d);
     }
     public void drawAvatarArea(Graphics2D g2d){
@@ -286,6 +290,8 @@ public class MenuPanel extends JPanel {
         displayer.drawAvatar(g2d);
 
     }
-
+    public void setDisplayer(Displayer displayer) {
+        this.displayer = displayer;
+    }
 
 }

@@ -64,7 +64,7 @@ public class Cigarette extends Entity {
             }
             walkingCounter = 0;
         }
-        showCoordinates(x,y,gP);
+        //showCoordinates(x,y,gP);
     }
 
     public void followPlayer(Player player) {
@@ -121,19 +121,6 @@ public class Cigarette extends Entity {
                 }
             }
         }
-
-//        if (player.x -x <= 500){
-//            randomNum =2;
-//        }
-//        else if (x - player.x >= -500){
-//            randomNum =3;
-//        }
-//        else if (player.y -y <= 500){
-//            randomNum =1;
-//        }
-//        else if (y - player.y >= -500){
-//            randomNum =0;
-//        }
     }
 
     public void setDefaultPosition(int x, int y, int speed) {

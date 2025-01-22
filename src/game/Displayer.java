@@ -134,7 +134,7 @@ public class Displayer {
             }
 
             //exit xd
-            text = "I want to get out of it";
+            text = "I want to stop";
             g2d.setColor(Color.BLACK);
             g2d.drawString(text, x, y*2 +gP.dispGridSize+5);
             if (selectOption == 1){

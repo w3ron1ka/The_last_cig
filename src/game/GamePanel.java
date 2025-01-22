@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         this.mP = menuPanel;
     }
 
+
     // dzwiek
     Sound melody = new Sound();
     Sound soundEffect = new Sound();
@@ -68,6 +69,11 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
     public final int nextLevelPhase = 3;
     public final int menuPhase = 4;
 
+    public void updateDisplayerState() {
+        mP.displayer = this.displayer;
+        mP.repaint();
+    }
+
     //konstruktor
     public GamePanel(CardLayout cardLayout, JPanel mainPanel) {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -75,11 +81,13 @@ public class GamePanel extends JPanel implements Runnable { //runnable jest do t
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);    // gra jest caly czas "gotowa" na nacisniecie klawisza
-        this.add(label);
-        this.add(labelCig);
+        //this.add(label);
+        //this.add(labelCig);
         this.add(menu);
-        //this.displayer = displayer;
-        displayer = new Displayer(this);
+
+        //displayer = new Displayer(this);
+        this.displayer = new Displayer(this);
+        //mP.setDisplayer(this.displayer);
 
         gamePhase = playPhase;
 

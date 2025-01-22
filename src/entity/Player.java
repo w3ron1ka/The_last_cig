@@ -82,6 +82,7 @@ public class Player extends Entity{
                 }
                 if (addicted%30 == 0 && addicted != 0 && !levelUp){
                     gP.displayer.addictionState++;
+                    //gP.updateDisplayerState();
 
                     gP.gamePhase = gP.nextLevelPhase;
                     gP.nextLevel();
@@ -164,7 +165,7 @@ public class Player extends Entity{
                     walkingTime = 0;
                 }
         }
-        showCoordinates(x,y,gP);
+        //showCoordinates(x,y,gP);
     }
 
     public void showCoordinates(int x, int y, GamePanel gP) {

@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f87d2340-b613-4a84-81fc-ce7b1db1db14" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Cigarette.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Cigarette.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/Displayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Displayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/KeyHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/MenuPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/MenuPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +78,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Game" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="game.Game" />
       <module name="MyGame" />
       <extension name="coverage">
@@ -91,11 +91,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Game" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -141,7 +136,7 @@
       <workItem from="1736848361614" duration="1415000" />
       <workItem from="1737128238265" duration="16320000" />
       <workItem from="1737285015139" duration="36935000" />
-      <workItem from="1737489506859" duration="18828000" />
+      <workItem from="1737489506859" duration="21799000" />
     </task>
     <servers />
   </component>
@@ -157,7 +152,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/game/GamePanel.java</url>
-          <line>322</line>
+          <line>326</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
